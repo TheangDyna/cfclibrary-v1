@@ -8,7 +8,7 @@ export default function conditional(){
        
             <div>
                 <Head>
-                    <title>Sabaicode</title>
+                    <title>Sabaicode Update </title>
                 </Head>
                 <Navbar />
                 <div className={styled.fContainer}>
