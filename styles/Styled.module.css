@@ -1,0 +1,224 @@
+.nav {
+  background: #EDF6E5;
+  height: 4rem;
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  display: flex;
+  top: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+}
+.navLink {
+  text-decoration: none;
+  font-size: 1.2rem;
+  margin: 0 5rem;
+}
+.navLink i {
+ margin-right: .5rem;
+}
+
+.button {
+  border-radius: .25rem;
+  padding: 8px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: #007bff; 
+  color: #fff; 
+  border: 1px solid #007bff;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.fContainer {
+  height: 40rem;
+  width: 90%;
+  margin: 2rem auto 0 auto; 
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.lHome {
+  height: 100%;
+  width: 60%;
+  display: block;
+  float: left;
+}
+
+.rHome {
+  height: 100%;
+  width: 40%;
+  display: block;
+  float: left;
+}
+
+.imgLibrary {
+  height: 100%;
+  width: 100%;
+}
+
+.homeImg {
+  background-image: url(https://api.time.com/wp-content/uploads/2020/03/bird-library-livestream.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+}
+
+.content {
+  background: rgba(232, 240, 242,.8);
+  width: 70%;
+  height: 100%;
+  text-align: center;
+}
+
+.blockText {
+  font-size: 1.2rem;
+  line-height: 3rem;
+  padding: 2rem 2rem 0 2rem;
+}
+
+.blockText h1 {
+  margin-bottom: 1rem;
+}
+
+.top, .bottom {
+  width: 100%;
+  height: 50%;
+}
+
+.left1, .left2 {
+  width: 50%;
+  height: 100%;
+  float: left;
+}
+
+.right1, .right2 {
+  width: 50%;
+  height: 100%;
+  float: left;
+}
+
+.left1 {
+  background: #B5EAEA;
+}
+
+.right2 {
+  background: #FFBCBC;
+}
+
+.left1, .right2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.p {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.left2 {
+  background-image: url(https://assets.entrepreneur.com/content/3x2/2000/20150827211532-reading-book-in-office-books-read.jpeg);
+  background-size: cover;
+  background-position: center;
+}
+
+.right1 {
+  background-image: url(https://www.letsroam.com/explorer/wp-content/uploads/sites/10/2020/09/shutterstock_55857208.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.signup_container {
+  height: 40rem;
+  width: 90%;
+  margin: 2rem auto 0 auto; 
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.signup_img{
+  width: 50%;
+  height: 100%;
+  float: left;
+  background-image: url(https://wpeverest.com/blog/wp-content/uploads/2019/11/Best-Free-WordPress-Registration-Plugins.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.signup_form {
+  width: 50%;
+  height: 100%;
+  float: right;
+}
+
+.from {
+  background: #EDF6E5;
+  display: block;
+  width: 80%;
+  margin: 4rem auto;
+  border-radius: 2rem;
+  padding: 2rem;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.from h1 {
+  width: 100%;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.form_name, .form_pass, .form_email {
+  width: 100%;
+}
+
+.input1, .input4{
+  width: 50%;
+  float: left;
+}
+
+.input2, .input5 {
+  width: 50%;
+  float: right;
+}
+
+.input3 {
+  width: 100%;
+  float: left;
+}
+
+.form_button {
+  width: 100%;
+  padding: 2rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input1 input, .input2 input, .input3 input, .input4 input, .input5 input{
+  height: 1.9rem;
+  border-radius: .25rem;
+  border: solid 1px white;
+  box-shadow: 0 0px 2px 1px rgba(0,0,0,0.2);
+  margin-left: 1rem;
+  font-size: 1rem;
+  padding-left: .5rem;
+}
+
+.input1 label, .input2 label, .input3 label, .input4 label, .input5 label {
+  display: block;
+  margin: 1rem 0 1rem 1rem;
+}
+
+.input1 input, .input2 input, .input4 input, .input5 input {
+  width: 85%;
+}
+
+.input3 input {
+  width: 93%;
+}
