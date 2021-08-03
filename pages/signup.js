@@ -10,6 +10,7 @@ import {
     IconButton,
     InputAdornment,
     FormHelperText,
+    Divider,
 } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -41,46 +42,93 @@ const useStyles = makeStyles((theme) => {
         },
         body: {
             marginTop: theme.spacing(4)
-        }
+        },
+        divider: {
+          height: 20,
+          marginLeft: 10,
+          marginRight: 5,
+        },
+        phoneNumber: {
+            '& input[type=number]': {
+                '-moz-appearance': 'textfield'
+            },
+            '& input[type=number]::-webkit-outer-spin-button': {
+                '-webkit-appearance': 'none',
+                margin: 0
+            },
+            '& input[type=number]::-webkit-inner-spin-button': {
+                '-webkit-appearance': 'none',
+                margin: 0
+            }
+        },
     }
 });
 
 const signup = () => {
 
     const classes = useStyles();
-    const [values1, setValues1] = useState({
-        password: '',
-        showPassword: false,
-    });
-    const handleChange1 = (prop) => (e) => {
-    setValues1({ ...values1, [prop]: e.target.value });
-    };
+    const [values, setValues] = useState({
+        password1: '',
+        showPassword1: false,
+        password2: '',
+        showPassword2: false,
+        phoneNumber: '',
+});
+const handleChange = (prop) => (e) => {
+    setValues({ ...values, [prop]: e.target.value });
+};
 
-    const handleClickShowPassword1 = () => {
-    setValues1({ ...values1, showPassword: !values1.showPassword });
-    };
+const handleClickShowPassword1 = () => {
+    setValues({ ...values, showPassword1: !values.showPassword1 });
+};
 
-    const handleMouseDownPassword1 = (e) => {
+const handleClickShowPassword2 = () => {
+    setValues({ ...values, showPassword2: !values.showPassword2 });
+};
+
+const handleMouseDownPassword = (e) => {
     e.preventDefault();
-    };
- 
-    const [values2, setValues2] = useState({
-        password: '',
-        showPassword: false,
-    });
-    const handleChange2 = (prop) => (e) => {
-    setValues2({ ...values2, [prop]: e.target.value });
-    };
+};
 
-    const handleClickShowPassword2 = () => {
-    setValues2({ ...values2, showPassword: !values2.showPassword });
-    };
+const [isSelected, setIsSelected] = useState(false);
 
-    const handleMouseDownPassword2 = (e) => {
-    e.preventDefault();
-    };
-
+const textAdornment = isSelected
+    ? {
+        startAdornment: (
+            <InputAdornment position="start">
+            +855 <Divider className={classes.divider} orientation="vertical" />
+            </InputAdornment>
+        )
+    }
+    : {};
+const createPass = {
+    endAdornment: (
+        <InputAdornment position="end">
+            <IconButton
+                onClick={handleClickShowPassword1}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+            >
+                {values.showPassword1 ? <Visibility /> : <VisibilityOff />}
+            </IconButton>
+        </InputAdornment>
+    )
+};
+const comfirmPass = {
+    endAdornment: (
+        <InputAdornment position="end">
+            <IconButton
+                onClick={handleClickShowPassword2}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+            >
+                {values.showPassword2 ? <Visibility /> : <VisibilityOff />}
+            </IconButton>
+        </InputAdornment>
+    )
+};
     
+
     return ( 
         <div>
         <div className={classes.signupForm}>
@@ -121,68 +169,45 @@ const signup = () => {
                             <TextField
                                 variant='outlined'
                                 type='number'
+                                className={classes.phoneNumber}
                                 size='small'
                                 required
                                 label='Phone Number'
                                 helperText= '^0^'
                                 fullWidth
+                                InputProps={textAdornment}
+                                onChange={handleChange('phoneNumber')}
+                                onFocus={e => setIsSelected(true)}
+                                onBlur={values.phoneNumber=='' ? (e => setIsSelected(false)):(e => setIsSelected(true))}
                             />
                         </Grid>
                         <Grid item sm={12} md={6} lg={6}>
-                            <FormControl
-                                variant="outlined"
-                                required
-                                size='small'
-                                fullWidth
-                            >
-                                <InputLabel>Create Password</InputLabel>
-                                <OutlinedInput
-                                type={values1.showPassword ? 'text' : 'password'}
-                                value={values1.password}
-                                onChange={handleChange1('password')}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                    <IconButton
-                                        onClick={handleClickShowPassword1}
-                                        onMouseDown={handleMouseDownPassword1}
-                                        edge="end"
-                                    >
-                                        {values1.showPassword ? <Visibility /> : <VisibilityOff />}
-                                    </IconButton>
-                                    </InputAdornment>
-                                }
-                                labelWidth={140}
+                            <TextField
+                                    variant='outlined'
+                                    size='small'
+                                    required
+                                    label='Create Password'
+                                    type={values.showPassword1 ? 'text' : 'password'}
+                                    value={values.password1}
+                                    onChange={handleChange('password1')}
+                                    helperText= '^0^'
+                                    fullWidth
+                                    InputProps={createPass}
                                 />
-                                <FormHelperText>^o^</FormHelperText>
-                            </FormControl>
                         </Grid>
                         <Grid item sm={12} md={6} lg={6}>
-                            <FormControl
-                                variant="outlined"
-                                required
-                                size='small'
-                                fullWidth
-                            >
-                                <InputLabel>Comfirm Password</InputLabel>
-                                <OutlinedInput
-                                type={values2.showPassword ? 'text' : 'password'}
-                                value={values2.password}
-                                onChange={handleChange2('password')}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                    <IconButton
-                                        onClick={handleClickShowPassword2}
-                                        onMouseDown={handleMouseDownPassword2}
-                                        edge="end"
-                                    >
-                                        {values2.showPassword ? <Visibility /> : <VisibilityOff />}
-                                    </IconButton>
-                                    </InputAdornment>
-                                }
-                                labelWidth={150}
+                            <TextField
+                                    variant='outlined'
+                                    size='small'
+                                    required
+                                    label='Comfirm Password'
+                                    type={values.showPassword2 ? 'text' : 'password'}
+                                    value={values.password2}
+                                    onChange={handleChange('password2')}
+                                    helperText= '^0^'
+                                    fullWidth
+                                    InputProps={comfirmPass}
                                 />
-                                <FormHelperText>^o^</FormHelperText>
-                            </FormControl>
                         </Grid>
                     </Grid>
                 </div>

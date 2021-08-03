@@ -184,7 +184,7 @@ const Navbar = () => {
                         <div className={classes.start}>
                             <List>
                                 {menuItems.map((item,index) => (
-                                    item.subList === 0 ? (
+                                    item.subList == 0 ? (
                                         <ListItem
                                             button 
                                             key={index} 
