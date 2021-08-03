@@ -1,5 +1,4 @@
-import { useRouter } from 'next/router'
-import styled from '../../../styles/Styled.module.css'
+import { useRouter } from 'next/router';
 
 export default function Activelink({children, href}){
     const router = useRouter();

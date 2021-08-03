@@ -1,16 +1,24 @@
 import '../styles/globals.css'
-import Head from 'next/head'
+import { createTheme, ThemeProvider } from '@material-ui/core'
+import Layout from './components/containers/Layout'
+
+const theme = createTheme({
+  typography:{
+    fontFamily: 'Quicksand',
+    fontWeightLight: 400,
+    fontWeightRegular: 500,
+    fontWeightMedium: 600,
+    fontWeightBold: 700
+  }
+})
 
 function MyApp({ Component, pageProps }) {
     return (
-      <div>
-         <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-        </Head>
-        <Component {...pageProps} />
-      </div>
-      
+      <ThemeProvider theme={theme}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>  
     )
 }
 
