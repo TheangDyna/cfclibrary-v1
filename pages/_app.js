@@ -5,6 +5,13 @@ import Layout from './components/containers/Layout'
 const theme = createTheme({
   typography:{
     fontFamily: 'Viga',
+  },
+  palette: {
+    primary:{
+      light: '#22c4ab',
+      main: '#1eae98',
+      dark: '#1a9885'
+    }
   }
 })
 

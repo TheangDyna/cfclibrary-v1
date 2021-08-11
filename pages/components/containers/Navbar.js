@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => {
             background: '#FFFFFF'
         },
         active: {
-            background: '#3f51b5',
+            background: '#1eae98',
             boxShadow:' 0 2px 2px 0 rgba(0,0,0,0.2)',
             color: '#FFFFFF',
             '&:hover': {

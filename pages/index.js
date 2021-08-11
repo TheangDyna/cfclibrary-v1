@@ -20,8 +20,32 @@ const useStyles = makeStyles((theme) =>({
         width : `100%`
     },
     h1:{
-        marginBottom: 30,
+        margin: 30,
+        fontSize:24,
     },
+    Header:{
+        backgroundRepeat : `no repeat`,
+        backgroundSize : `cover`,
+        backgroundImage : `url(${"https://img.freepik.com/free-vector/blue-pink-halftone-background_53876-99004.jpg?size=626&ext=jpg&ga=GA1.2.2037226289.1628467200"})`,
+        width:`100%`,
+        height:440,
+    },
+    text:{
+        display: 'block',
+        width :`100%`,
+        margin:'0 auto',
+        textAlign :'center',
+        padding : 80 ,
+        
+    },
+    BgImage:{
+        width:`100%`,
+        paddingTop : 15 ,
+    },
+    button:{
+        margin: 20,
+        
+    }
   }));
 export default function HomePage(){
     const classes = useStyles();
@@ -31,23 +55,23 @@ export default function HomePage(){
             img : "https://img.freepik.com/free-vector/realistic-bokeh-background_23-2148987168.jpg?size=626&ext=jpg",
         },
         {
-            type :"Math",
+            type :"Biogy",
             img : "https://img.freepik.com/free-vector/realistic-bokeh-background_23-2148987168.jpg?size=626&ext=jpg",
         },
         {
-            type :"Math",
+            type :"History",
             img : "https://img.freepik.com/free-vector/realistic-bokeh-background_23-2148987168.jpg?size=626&ext=jpg",
         },
         {
-            type :"Math",
+            type :"Art",
             img : "https://img.freepik.com/free-vector/realistic-bokeh-background_23-2148987168.jpg?size=626&ext=jpg",
         },
         {
-            type :"Math",
+            type :"Cooking",
             img : "https://img.freepik.com/free-vector/realistic-bokeh-background_23-2148987168.jpg?size=626&ext=jpg",
         },
         {
-            type :"Math",
+            type :"Health",
             img : "https://img.freepik.com/free-vector/realistic-bokeh-background_23-2148987168.jpg?size=626&ext=jpg",
         },
     ]
@@ -102,19 +126,35 @@ export default function HomePage(){
     ];
     return(
         <div className ={classes.root}>
+            
+                   <Grid container spacing={2} className= {classes.Header}>
+                        <Grid item xs={12} sm={6}>
+                            <div className={classes.text}>
+                                <h1 >Welcome to CFC Library</h1>
+                                <Typography>We believe that reading opens doors, and part of our mission is to change the way the world reads by providing a wide range of reading material in both print and audio formats at a price that is fair for both creators and consumers.</Typography>
+                                <Button className= {classes.button} variant= 'contained' color= 'primary'>Get Start</Button>
+                           </div>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <img className= {classes.BgImage} src="https://i.insider.com/5e81f9732d41c119bc47ff98?width=1136&format=jpeghttps://i.insider.com/5e81f9732d41c119bc47ff98?width=1136&format=jpeg"></img>
+                        </Grid>
+                   </Grid>
+        
+            
+            <Typography className={classes.h1}>Type of book</Typography>
             <Grid container spacing={3}>
                 {MathBooks.map((MathBook,index)=>(
                     <Grid  key={index} className = {classes.main} item xs = {12} sm = {6} md = {3} lg={2}>
                         <Paper>
                             <div className = {classes.slideImage}>
                                 <img className = {classes.imgType} src={MathBook.img}></img>
-                                i lo ve you k'be
+                                <Typography>{MathBook.type}</Typography>
                             </div>
                         </Paper>
                     </Grid>
                 ))}
             </Grid>
-        <h1 className={classes.h1}>Top Borrow Book</h1>
+            <Typography className={classes.h1}>Top Borrow Book</Typography>
            <Grid container spacing={3}>
                 {Books.map((Book,index)=>(
                     <Grid key={index} className = {classes.main} item xs = {12} sm = {6} md = {3} lg={2}>
