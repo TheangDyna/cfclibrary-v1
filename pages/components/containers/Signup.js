@@ -17,9 +17,11 @@ import {
     Card,
     Link,
     Button,
+    Dialog,
 } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import CloseIcon from '@material-ui/icons/Close';
 import {
     MuiPickersUtilsProvider,
     KeyboardDatePicker,
@@ -90,6 +92,14 @@ const useStyles = makeStyles((theme) => {
         bottomLink: {
             display: 'flex',
             justifyContent: 'center',
+        },
+        closeDialogButton: {
+            position: 'absolute',
+            right: theme.spacing(1),
+            top: theme.spacing(1),
+        },
+        link: {
+            cursor: 'pointer'
         }
         
     }
@@ -167,14 +177,15 @@ const comfirmPass = {
         </InputAdornment>
     )
 };
-    
-
-    return ( 
+    return (
         <div>
              <div className={classes.signup__form}>
                 <Card className={classes.signup__card}>
                     <form noValidate autoComplete='off'>
                         <div className={classes.head}>
+                            <IconButton className={classes.closeDialogButton} onClick={close}>
+                                <CloseIcon />
+                            </IconButton>
                             <Typography variant='h5'>
                                 Sign Up To CFC Library
                             </Typography>
@@ -319,10 +330,9 @@ const comfirmPass = {
                                         Sign Up
                                     </Button>
                                 </Grid>
-                                <Divider className={classes.divider}/>
                                 <Grid item sm={12} md={12} lg={12} className={classes.bottomLink}>
                                     <Typography>
-                                        I ready have an account. <Link href="#">SignIn Now</Link>
+                                        Already have an account? <Link className={classes.link}>SignIn Now</Link>
                                     </Typography>
                                 </Grid>
                             </Grid>
