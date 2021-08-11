@@ -1,19 +1,23 @@
+import { Typography } from '@material-ui/core';
 import React, {useState} from 'react';
 
 const Home = () => {
 
     const [users, setUsers] = useState([
-        {name: 'dyna', age: 30},
-        {name: 'danit', age: 12},
+        {name: 'dyna', age: 10},
         {name: 'danit', age: 12},
     ]);
     
     return ( 
        <div>
-           {users.map((user)=>(
-               <div>
-                   <h2>User'name: {user.name}</h2>
-                    <p>Age: {user.age}</p>
+           {users.map((user,index)=>(
+               <div key={index}>
+                   <Typography variant='h6'>
+                        User'name: {user.name}
+                   </Typography>
+                   <Typography color='textSecondary'>
+                        Age: {user.age}
+                   </Typography>
                </div>
            ))}
        </div>

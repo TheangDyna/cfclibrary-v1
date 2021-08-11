@@ -13,6 +13,8 @@ import {
     Toolbar,
     IconButton,
     Avatar,
+    Dialog,
+    Button,
 } from '@material-ui/core';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import LibraryBooksOutlinedIcon from '@material-ui/icons/LibraryBooksOutlined';
@@ -28,32 +30,42 @@ import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
 import { useRouter } from 'next/router';
+import Signup from './Signup';
+import Signin from './Signin';
+
 
 const drawerWidth = 200;
 const user = 'Dyna';
 const useStyles = makeStyles((theme) => {
     return {
-        grow: {
+        flexGrow: {
             flexGrow: 1,
           },
         drawer: {
             width: drawerWidth,
         },
-        drawerPaper: {
+        drawer__paper: {
             width: drawerWidth,
             background: '#FFFFFF'
         },
         active: {
-            background: '#B5EAEA',
+            background: '#3f51b5',
             boxShadow:' 0 2px 2px 0 rgba(0,0,0,0.2)',
+            color: '#FFFFFF',
+            '&:hover': {
+                background: '#303f9f',
+            },
         },
-        title: {
-            paddingTop: theme.spacing(2),
+        active__icon: {
+            color: '#FFFFFF',
+        },
+        menu__title: {
+            paddingTop: theme.spacing(3),
         },
         nested: {
             paddingLeft: theme.spacing(4),
         },
-        subList: {
+        sublist: {
             background: '#F4F4F4',
             width: `90%`,
             marginLeft: 'auto',
@@ -62,17 +74,22 @@ const useStyles = makeStyles((theme) => {
             marginBottom: 10,
 
         },
-        appBar: {
+        appbar: {
             background: '#FFFFFF',
             zIndex:theme.zIndex.drawer+1,
             boxShadow:' 0 1px 1px 0 rgba(0,0,0,0.1)',
+            height: 60
         },
-        avatar: {
+        appbar__avatar: {
             background: '#B5EAEA',
             marginLeft: theme.spacing(2),
             color: '#000000'
         },
-        end: {
+        signin__button: {
+            marginLeft: theme.spacing(2),
+            minWidth: 'max-content'
+        },
+        bottom__list: {
             position: 'absolute',
             bottom: 10,
             width: `100%`
@@ -85,7 +102,7 @@ const Navbar = () => {
     const router = useRouter();
     const [open, setOpen] = useState(false);
 
-    const handleClick = () => {
+    const handleClickSublist = () => {
         setOpen(!open);
     };
     const menuItems = [
@@ -93,18 +110,18 @@ const Navbar = () => {
             text: 'home',
             icon: <HomeOutlinedIcon />,
             path: '/',
-            subList: 0
+            sublist: 0
         },
         {
             text: 'Library',
             icon: <LibraryBooksOutlinedIcon />,
             path: '/library',
-            subList: 0
+            sublist: 0
         },
         {
             text: 'Profile',
             icon: <AccountCircleOutlinedIcon />,
-            subList: 1,
+            sublist: 1,
             subListMenu:[
                 {
                     text: 'History',
@@ -127,88 +144,93 @@ const Navbar = () => {
             text: 'Report',
             icon: <AssessmentOutlinedIcon />,
             path: '/report',
-            subList: 0
+            sublist: 0
         },
         {
             text: 'About',
             icon: <InfoOutlinedIcon />,
             path: '/about',
-            subList: 0
+            sublist: 0
         },
         {
             text: 'Contact',
             icon: <ForumOutlinedIcon /*style={{color: 'gray'}}*/ />,
             path: '/contact',
-            subList: 0
+            sublist: 0
         }
     ];
+
+    const [openSignup, setOpenSignup] = useState(false);
+    const [openSignin, setOpenSignin] = useState(false);
     
     return (
         <div>
             <AppBar
                 position='fixed' 
-                className={classes.appBar}
+                className={classes.appbar}
                 elevation={0}
             >
                 <Toolbar>
                     <Typography color='textPrimary' variant='h5' noWrap>
-                        ¯\_(ツ)_/¯ Welcome to Aranh CFC Library
+                        Welcome to Aranh CFC Library
                     </Typography>
-                    <div className={classes.grow} />
+                    <div className={classes.flexGrow} />
                     <IconButton>
                         <Badge badgeContent={100} color='secondary' max={9}>
                             <NotificationsNoneOutlinedIcon />
                         </Badge>
                     </IconButton>
-                    <Avatar className={classes.avatar}>
+                    <Avatar className={classes.appbar__avatar}>
                         {user[0].toUpperCase()}
                     </Avatar>
+                    <Button variant='contained' color='primary' className={classes.signin__button} onClick={() => setOpenSignin(true)}>
+                        Sign In
+                    </Button>
                 </Toolbar>
             </AppBar>
             <Drawer
                 className={classes.drawer}
                 variant='permanent'
                 anchor='left'
-                classes={{ paper: classes.drawerPaper}}
+                classes={{ paper: classes.drawer__paper}}
             >
                 <Toolbar />
                 <Typography
                     color='textSecondary'
                     align='center'
-                    variant='h5'
-                    className={classes.title}
+                    variant='h6'
+                    className={classes.menu__title}
                 >
                     Menu
                 </Typography>
                     <div className={classes.container}>
                         <div className={classes.start}>
                             <List>
-                                {menuItems.map((item,index) => (
-                                    item.subList == 0 ? (
+                                {menuItems.map((item) => (
+                                    item.sublist == 0 ? (
                                         <ListItem
                                             button 
-                                            key={index} 
+                                            key={item.text} 
                                             onClick={() => router.push(item.path)}
                                             className={router.pathname == item.path ? classes.active : null}
                                         >
-                                            <ListItemIcon>{item.icon}</ListItemIcon>
+                                            <ListItemIcon className={router.pathname == item.path ? classes.active__icon : null}>{item.icon}</ListItemIcon>
                                             <ListItemText primary={item.text} />
                                         </ListItem>
                                     ):(
-                                        <div>
+                                        <div key={item.text}>
                                             <ListItem
                                                 button 
-                                                key={index}
-                                                onClick={handleClick}
+                                                onClick={handleClickSublist}
                                             >
                                                 <ListItemIcon>{item.icon}</ListItemIcon>
                                                 <ListItemText primary={item.text} />
                                                 {open ? <ExpandLess /> : <ExpandMore />}
                                             </ListItem>
                                             <Collapse in={open} timeout='auto' unmountOnExit>
-                                                <List component='div' disablePadding className={classes.subList}>
-                                                    {item.subListMenu.map((subItem,index ) => (
-                                                        <ListItem button className={classes.nested} key={index} >
+                                                <List component='div' disablePadding className={classes.sublist}>
+                                                    {item.subListMenu.map((subItem ) => (
+                                                        <ListItem button className={classes.nested} key={subItem.text} >
                                                             <ListItemIcon>{subItem.icon}</ListItemIcon>
                                                             <ListItemText primary={subItem.text} />
                                                         </ListItem>
@@ -220,21 +242,28 @@ const Navbar = () => {
                                 ))}
                             </List>
                         </div>
-                        <div className={classes.end}>
+                        <div className={classes.bottom__list}>
                             <List>
                                     <ListItem
                                         button
-                                        onClick={() => router.push('/loguot')}
+                                        // onClick={() => router.push('/loguot')}
+                                        onClick={() => setOpenSignup(true)}
                                     >
                                         <ListItemIcon>
                                             <ExitToAppOutlinedIcon />
                                         </ListItemIcon>
-                                        <ListItemText primary='Log Out' />
+                                        <ListItemText primary='Sign Up' />
                                     </ListItem>
                             </List>
                         </div>
                     </div>
             </Drawer>
+            <Dialog open={openSignup}>
+                <Signup close={() => setOpenSignup(false)}/>
+            </Dialog>
+            <Dialog open={openSignin}>
+                <Signin close={() => setOpenSignin(false)}/>
+            </Dialog>
         </div>
      );
 }

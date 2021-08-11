@@ -7,9 +7,11 @@ const useStyles = makeStyles((theme) => {
             display: 'flex'
         },
         page: {
-            // background: '#F4F4F4',
+            background: '#F9F9F9',
             width: '100%',
-            padding: theme.spacing(3),
+            paddingLeft: theme.spacing(3),
+            paddingRight: theme.spacing(3),
+            paddingTop: theme.spacing(3),
         },
         toolbar: theme.mixins.toolbar,
     }
