@@ -10,9 +10,11 @@ import {
     Divider,
     Card,
     Button,
+    Link,
 } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme) => {
     return{
@@ -72,7 +74,19 @@ const useStyles = makeStyles((theme) => {
                 margin: 0
             }
         },
-        
+        closeDialogButton: {
+            position: 'absolute',
+            right: theme.spacing(1),
+            top: theme.spacing(1),
+        },
+        bottomLink: {
+            display: 'flex',
+            justifyContent: 'center',
+            textAlign: 'center'
+        },
+        link: {
+            cursor: 'pointer'
+        }
     }
 });
 
@@ -127,6 +141,9 @@ const pass = {
                 <Card className={classes.signin__card}>
                     <form noValidate autoComplete='off'>
                         <div className={classes.head}>
+                            <IconButton className={classes.closeDialogButton} onClick={close}>
+                                <CloseIcon />
+                            </IconButton>
                             <Typography variant='h5'>
                                 Sign In To CFC Library
                             </Typography>
@@ -159,7 +176,7 @@ const pass = {
                                             variant='outlined'
                                             size='small'
                                             required
-                                            label='Create Password'
+                                            label='Password'
                                             type={values.showPassword ? 'text' : 'password'}
                                             // value={values.password}
                                             onChange={handleChange('password')}
@@ -175,8 +192,15 @@ const pass = {
                                 </Grid>
                                 <Grid item sm={6} md={6} lg={6}>
                                     <Button variant='contained' color='primary' type='submit' className={classes.signin__button}>
-                                        Sign Up
+                                        Sign In
                                     </Button>
+                                </Grid>
+                                <Grid item sm={12} md={12} lg={12} className={classes.bottomLink}>
+                                    <Typography>
+                                        Don't have an account? <Link className={classes.link} >SignUp Now</Link>
+                                        <br />
+                                        Forget Password? <Link className={classes.link} >Reset Password</Link>
+                                    </Typography>
                                 </Grid>
                             </Grid>
                         </div>
