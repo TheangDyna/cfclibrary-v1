@@ -10,9 +10,10 @@ const theme = createTheme({
     primary:{
       light: '#22c4ab',
       main: '#1eae98',
-      dark: '#1a9885'
-    }
-  }
+      dark: '#1a9885',
+      contrastText: "#ffffff"
+    },
+  },
 })
 
 function MyApp({ Component, pageProps }) {

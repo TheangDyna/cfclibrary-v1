@@ -25,17 +25,17 @@ const useStyles = makeStyles((theme) => ({
     },
     card__img: {
         height: 200,
-        width: `100%`,
-       marginBottom: theme.spacing(1)
+        width: '100%',
+        marginBottom: theme.spacing(1)
     },
     card__content: {
         padding: 0
     },
     search: {
         padding: '2px 4px',
-        display: 'flex',  
+        display: 'flex',
         alignItems: 'center',
-        width: `100%`,
+        width: '100%',
     },
     search__input: {
         marginLeft: theme.spacing(3),
@@ -48,59 +48,59 @@ const useStyles = makeStyles((theme) => ({
         height: 28,
         margin: 4,
     },
-  }));
+}));
 
 const library = () => {
     const books = [
         {
-            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-IW0Xts3yT_2hNUNVrFjUrnivOosU8CXitg&usqp=CAU',
-            author: 'Danit',
+            img: 'https://www.writersdigest.com/.image/c_fit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_620/MTcxMDY1ODEzNjcxMDk0MjU3/image-placeholder-title.jpg',
+            title: 'Anna Karenina',
         },
         {
-            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-IW0Xts3yT_2hNUNVrFjUrnivOosU8CXitg&usqp=CAU',
-            author: 'Danit',
+            img: 'https://www.writersdigest.com/.image/c_fit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_620/MTcxMDY1ODEzNjcxMDk0MjU3/image-placeholder-title.jpg',
+            title: 'To Kill a Mockingbird',
         },
         {
-            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-IW0Xts3yT_2hNUNVrFjUrnivOosU8CXitg&usqp=CAU',
-            author: 'Danit',
+            img: 'https://www.writersdigest.com/.image/c_fit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_620/MTcxMDY1ODEzNjcxMDk0MjU3/image-placeholder-title.jpg',
+            title: 'The Great Gatsby',
         },
         {
-            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-IW0Xts3yT_2hNUNVrFjUrnivOosU8CXitg&usqp=CAU',
-            author: 'Danit',
+            img: 'https://www.writersdigest.com/.image/c_fit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_620/MTcxMDY1ODEzNjcxMDk0MjU3/image-placeholder-title.jpg',
+            title: 'One Hundred Years of Solitude',
         },
         {
-            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-IW0Xts3yT_2hNUNVrFjUrnivOosU8CXitg&usqp=CAU',
-            author: 'Danit',
+            img: 'https://www.writersdigest.com/.image/c_fit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_620/MTcxMDY1ODEzNjcxMDk0MjU3/image-placeholder-title.jpg',
+            title: 'A Passage to India',
         },
         {
-            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-IW0Xts3yT_2hNUNVrFjUrnivOosU8CXitg&usqp=CAU',
-            author: 'Danit',
+            img: 'https://www.writersdigest.com/.image/c_fit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_620/MTcxMDY1ODEzNjcxMDk0MjU3/image-placeholder-title.jpg',
+            title: 'Invisible Man',
         },
         {
-            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-IW0Xts3yT_2hNUNVrFjUrnivOosU8CXitg&usqp=CAU',
-            author: 'Danit',
+            img: 'https://www.writersdigest.com/.image/c_fit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_620/MTcxMDY1ODEzNjcxMDk0MjU3/image-placeholder-title.jpg',
+            title: 'Don Quixote',
         },
         {
-            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-IW0Xts3yT_2hNUNVrFjUrnivOosU8CXitg&usqp=CAU',
-            author: 'Danit',
+            img: 'https://www.writersdigest.com/.image/c_fit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_620/MTcxMDY1ODEzNjcxMDk0MjU3/image-placeholder-title.jpg',
+            title: 'Beloved',
         },
         {
-            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-IW0Xts3yT_2hNUNVrFjUrnivOosU8CXitg&usqp=CAU',
-            author: 'Danit',
+            img: 'https://www.writersdigest.com/.image/c_fit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_620/MTcxMDY1ODEzNjcxMDk0MjU3/image-placeholder-title.jpg',
+            title: 'Mrs. Dalloway',
         },
         {
-            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-IW0Xts3yT_2hNUNVrFjUrnivOosU8CXitg&usqp=CAU',
-            author: 'Danit',
+            img: 'https://www.writersdigest.com/.image/c_fit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_620/MTcxMDY1ODEzNjcxMDk0MjU3/image-placeholder-title.jpg',
+            title: 'Things Fall Apart',
         },
         {
-            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-IW0Xts3yT_2hNUNVrFjUrnivOosU8CXitg&usqp=CAU',
-            author: 'Danit',
+            img: 'https://www.writersdigest.com/.image/c_fit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_620/MTcxMDY1ODEzNjcxMDk0MjU3/image-placeholder-title.jpg',
+            title: 'The Color Purple',
         },
         {
-            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-IW0Xts3yT_2hNUNVrFjUrnivOosU8CXitg&usqp=CAU',
-            author: 'Danit',
+            img: 'https://www.writersdigest.com/.image/c_fit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_620/MTcxMDY1ODEzNjcxMDk0MjU3/image-placeholder-title.jpg',
+            title: 'Follow Your Heard',
         },
-        
+
     ]
 
     const bookCategories = [
@@ -223,21 +223,21 @@ const library = () => {
     };
     const classes = useStyles();
 
-    return ( 
+    return (
         <div>
             <Grid container spacing={2}>
                 <Grid item lg={8}>
                     <Autocomplete
                         freeSolo
-                        options={books.map((option,index) => ('book '+ index))}
+                        options={books.map((option, index) => ('book ' + index))}
                         renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            label="Search"
-                            variant="outlined"
-                            fullWidth
-                            size='small'
-                        />
+                            <TextField
+                                {...params}
+                                label='Search'
+                                variant='outlined'
+                                fullWidth
+                                size='small'
+                            />
                         )}
                     />
                 </Grid>
@@ -251,7 +251,7 @@ const library = () => {
                         value={categories}
                         onChange={handleChangeCategories}
                     >
-                        {bookCategories.map((bookCategory,index)=>(
+                        {bookCategories.map((bookCategory, index) => (
                             <MenuItem
                                 key={index}
                                 value={bookCategory.title}
@@ -262,9 +262,9 @@ const library = () => {
                     </TextField>
                 </Grid>
             </Grid>
-            
+
             <Grid container spacing={2} className={classes.container}>
-                {books.map((book,index)=>(
+                {books.map((book, index) => (
                     <Grid item lg={2} key={index}>
                         <Card className={classes.card}>
                             <CardMedia
@@ -275,13 +275,13 @@ const library = () => {
                                 <Grid container>
                                     <Grid item lg={12}>
                                         <Typography variant='h6' noWrap>
-                                            book {index}
+                                            {book.title}
                                         </Typography>
                                     </Grid>
                                     <Grid container alignItems='center'>
                                         <Grid item lg={10}>
                                             <Typography variant='subtitle1' color='textSecondary' noWrap>
-                                                {book.author}
+                                                {book.title}
                                             </Typography>
                                         </Grid>
                                         <Grid item lg={2}>
@@ -306,7 +306,7 @@ const library = () => {
                 ))}
             </Grid>
         </div>
-     );
+    );
 }
 
 export default library;
