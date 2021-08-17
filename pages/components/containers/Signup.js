@@ -136,9 +136,9 @@ const handleMouseDownPassword = (e) => {
 };
 const [selectedDate, setSelectedDate] =useState();
 
-  const handleDateChange = (date) => {
+const handleDateChange = (date) => {
     setSelectedDate(date);
-  };
+};
 
 const [isSelected, setIsSelected] = useState(false);
 

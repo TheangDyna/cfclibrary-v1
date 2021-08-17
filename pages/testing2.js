@@ -1,36 +1,75 @@
 import React from 'react';
-import {
-  MenuItem,
-  TextField,
-} from '@material-ui/core';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+
+const data = [
+  {
+    name: 'Page A',
+    uv: 4000,
+    pv: 2400,
+    amt: 2400,
+  },
+  {
+    name: 'Page B',
+    uv: 3000,
+    pv: 1398,
+    amt: 2210,
+  },
+  {
+    name: 'Page C',
+    uv: 2000,
+    pv: 9800,
+    amt: 2290,
+  },
+  {
+    name: 'Page D',
+    uv: 2780,
+    pv: 3908,
+    amt: 2000,
+  },
+  {
+    name: 'Page E',
+    uv: 1890,
+    pv: 4800,
+    amt: 2181,
+  },
+  {
+    name: 'Page F',
+    uv: 2390,
+    pv: 3800,
+    amt: 2500,
+  },
+  {
+    name: 'Page G',
+    uv: 3490,
+    pv: 4300,
+    amt: 2100,
+  },
+];
 
 const testing2 = () => {
-  const [age, setAge] = React.useState('10 A');
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-    console.log(event.target.value);
-  };
-
   return (
     <div>
-      <TextField
-          variant='text'
-          select
-          size='small'
-          fullWidth
-          value={age}
-          onChange={handleChange}
+      <LineChart
+        width={500}
+        height={300}
+        data={data}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
       >
-          <MenuItem value='10 A'>10 A</MenuItem>
-          <MenuItem value='10 B'>10 B</MenuItem>
-          <MenuItem value='11 A'>11 A</MenuItem>
-          <MenuItem value='11 B'>11 B</MenuItem>
-          <MenuItem value='12 A'>12 A</MenuItem>
-          <MenuItem value='12 B'>12 B</MenuItem>
-      </TextField>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
+        <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+      </LineChart>
     </div>
   );
 }
- 
+
 export default testing2;
