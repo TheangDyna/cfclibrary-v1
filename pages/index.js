@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Grid, Paper, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundColor: 'white',
+       
     },
     media: {
-        backgroundColor: 'whitesmoke',
+        backgroundColor: 'white',
         padding: 20,
     },
     image: {
@@ -26,17 +25,11 @@ const useStyles = makeStyles((theme) => ({
     Header: {
         backgroundRepeat: `no repeat`,
         backgroundSize: `cover`,
-        backgroundImage: `url("https://img.freepik.com/free-vector/blue-pink-halftone-background_53876-99004.jpg?size=626&ext=jpg&ga=GA1.2.2037226289.1628467200")`,
+        backgroundImage: `url("https://media.gettyimages.com/photos/bookshelves-tables-with-chairs-in-library-picture-id1201866998?k=6&m=1201866998&s=612x612&w=0&h=_uuhtgpww3Ia7vdMYrDDWc_VN-EVBf8Cp3HXjQ2cww0=")`,
         width: `100%`,
-        height: 440,
+       
     },
-    text: {
-        display: 'block',
-        width: `100%`,
-        margin: '0 auto',
-        textAlign: 'center',
-
-    },
+    
     BgImage: {
         height: '100%',
     },
@@ -47,9 +40,22 @@ const useStyles = makeStyles((theme) => ({
         margin: 20,
 
     },
+    text: {
+        display: 'block',
+        width: `50%`,
+        textAlign: 'center',
+        paddingTop: 50,
+        backgroundColor:`rgba(255,255,255,0.6)`
+
+    },
     logo: {
         marginTop: 20,
         marginBottom: 20,
+    },
+    footer:{
+        backgroundColor: "Black",
+        width:`100%`,
+        height:300,
     }
 }));
 export default function HomePage() {
@@ -131,24 +137,21 @@ export default function HomePage() {
     ];
     return (
         <div className={classes.root}>
-
-            <Grid container spacing={2} className={classes.Header}>
-                <Grid item xs={12} sm={6}>
+          <div className= {classes.Header}>
+                <div className={classes.text}>
                     <div align='center' className={classes.logo}>
                         <img src='images/logo.png' width='200px' />
                     </div>
-                    <div className={classes.text}>
+
                     <Typography variant='h4'>Welcome to CFC Library</Typography>
                         <Typography>We believe that reading opens doors, and part of our mission is to change the way the world reads by providing a wide range of reading material in both print and audio formats at a price that is fair for both creators and consumers.</Typography>
                         <Button className={classes.button} variant='contained' color='primary'>
                             Get Start
                         </Button>
                     </div>
-                </Grid>
-                <Grid item xs={12} sm={6} className={classes.BgImage} >
-                    <img className={classes.BgImage1} src="https://i.insider.com/5e81f9732d41c119bc47ff98?width=1136&format=jpeghttps://i.insider.com/5e81f9732d41c119bc47ff98?width=1136&format=jpeg"></img>
-                </Grid>
-            </Grid>
+
+            </div>
+
 
 
             <Typography className={classes.h1}>Type of book</Typography>
@@ -176,6 +179,11 @@ export default function HomePage() {
                     </Grid>
                 ))}
             </Grid>
+            <div className={classes.footer}>
+                <div>
+                    
+                </div>
+            </div>
         </div>
     )
 }
