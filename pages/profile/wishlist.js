@@ -11,14 +11,10 @@ import {
     IconButton,
     TextField,
     MenuItem,
-    Fab,
-    Dialog,
 } from '@material-ui/core';
 import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
 import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined';
-import AddIcon from '@material-ui/icons/Add';
-import { bookCategories, books } from './components/presentaions/data'
-import AddBooks from './components/containers/AddBooks'
+import { books, bookCategories } from '../components/presentaions/data';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,19 +32,33 @@ const useStyles = makeStyles((theme) => ({
     card__content: {
         padding: 0
     },
-    fab: {
-        position: 'fixed',
-        bottom: theme.spacing(3),
-        right: theme.spacing(3),
+    search: {
+        padding: '2px 4px',
+        display: 'flex',
+        alignItems: 'center',
+        width: '100%',
+    },
+    search__input: {
+        marginLeft: theme.spacing(3),
+        flex: 1,
+    },
+    search__icon: {
+        padding: 10,
+    },
+    search__divider: {
+        height: 28,
+        margin: 4,
     },
 }));
 
-const library = () => {
+const wishlist = () => {
     const [categories, setCategories] = useState('');
+    const handleChangeCategories = (e) => {
+        setCategories(e.target.value);
+    };
     const classes = useStyles();
-    const [openAddBooks, setOpenAddBooks] = useState(false);
     const [valueSearch, setValueSearch] = useState('');
-    const usered = true;
+
     return (
         <div>
             <Grid container spacing={2}>
@@ -82,12 +92,12 @@ const library = () => {
                         fullWidth
                         size='small'
                         value={categories}
-                        onChange={(e) => setCategories(e.target.value)}
+                        onChange={handleChangeCategories}
                     >
                         {bookCategories.map((bookCategory, index) => (
                             <MenuItem
                                 key={index}
-                                value={bookCategory.value}
+                                value={bookCategory.title}
                             >
                                 {bookCategory.title}
                             </MenuItem>
@@ -96,14 +106,8 @@ const library = () => {
                 </Grid>
             </Grid>
             <Grid container spacing={2} className={classes.container}>
-                {books.filter((book) => book.category.toLowerCase().includes(categories.toLowerCase())
-                    || book.subcategory.toLowerCase().includes(categories.toLowerCase())
-                ).filter((book) => book.title.toLowerCase().includes(valueSearch.toLowerCase())
-                    || book.author.toLowerCase().includes(valueSearch.toLowerCase())
-                ).map((book, index) => (
-                    valueSearch == '' ?
-                    (
-                        <Grid item lg={2} key={index}>
+                {books.map((book, index) => (
+                    <Grid item lg={2} key={index}>
                         <Card className={classes.card}>
                             <CardMedia
                                 className={classes.card__img}
@@ -119,7 +123,7 @@ const library = () => {
                                     <Grid container alignItems='center'>
                                         <Grid item lg={10}>
                                             <Typography variant='subtitle1' color='textSecondary' noWrap>
-                                                {book.author}
+                                                {book.title}
                                             </Typography>
                                         </Grid>
                                         <Grid item lg={2}>
@@ -139,26 +143,12 @@ const library = () => {
                                 </Button>
                             </CardActions>
                         </Card>
+
                     </Grid>
-                    ) : (
-                        null
-                    )
                 ))}
             </Grid>
-            {
-                usered ? (
-                    null
-                ) : (
-                    <Fab color='primary' className={classes.fab} onClick={() => setOpenAddBooks(true)}>
-                        <AddIcon />
-                    </Fab>
-                )
-            }
-            <Dialog open={openAddBooks}>
-                <AddBooks close={() => setOpenAddBooks(false)} />
-            </Dialog>
         </div>
     );
 }
 
-export default library;
+export default wishlist;

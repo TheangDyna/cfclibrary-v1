@@ -1,43 +1,28 @@
-import React, { useState } from 'react';
+  import React, { useState } from 'react';
 import {
     makeStyles,
-    Button,
     Grid,
     Typography,
     Card,
     CardMedia,
     CardContent,
-    CardActions,
     IconButton,
-    TextField,
-    MenuItem,
 } from '@material-ui/core';
-import {
-    MuiPickersUtilsProvider,
-    KeyboardDatePicker,
-} from '@material-ui/pickers';
-import {
-    LineChart,
-    Line,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    Legend,
-    ResponsiveContainer
-} from 'recharts';
-import { useRouter } from 'next/router';
-import DateFnsUtils from '@date-io/date-fns';
 import AssignmentReturnOutlinedIcon from '@material-ui/icons/AssignmentReturnOutlined';
 import AssignmentLateOutlinedIcon from '@material-ui/icons/AssignmentLateOutlined';
 import AssignmentTurnedInOutlinedIcon from '@material-ui/icons/AssignmentTurnedInOutlined';
-import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
+import dynamic from 'next/dynamic';
 import {
-    dailyData,
-    weeklyData,
-    monthlyData,
-    yearlyData,
-} from './components/presentaions/data';
+    g10y2020,
+} from './components/presentaions/data'
+  const PieChart = dynamic(
+    () => import("./components/containers/dashboards/PieChart"),
+    { ssr: false }
+  );
+  const LineChart = dynamic(
+    () => import("./components/containers/dashboards/lineChart"),
+    { ssr: false }
+  );
 const useStyles = makeStyles((theme) => ({
     dailyCard: {
         display: 'flex',
@@ -74,60 +59,27 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center'
     },
-    selectedDate: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
     buttonMore: {
         paddingLeft: 10,
     },
     date__block: {
         marginTop: 20
     },
-    statsContainer: {
-        width: '80%',
-        margin: '0 auto',
-        height: 400,
-        paddingTop: 40,
-        paddingBottom: 20
+    chart__block: {
+        width: '100%',
+        height: '50vh'
+    },
+    chart: {
+        marginTop: theme.spacing(4)
     }
 
 }));
 
 
 const report = () => {
-    const router = useRouter();
     const classes = useStyles();
-    const [selectedDate, setSelectedDate] = useState();
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-    };
     return (
         <div>
-            <Grid container>
-                <Grid item lg={12} className={classes.selectedDate}>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <KeyboardDatePicker
-                            required
-                            variant='inline'
-                            inputVariant='outlined'
-                            label='Date'
-                            size='small'
-                            format='dd/MMMM/yyyy'
-                            // helperText= '^0^'
-                            fullWidth
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                        />
-                    </MuiPickersUtilsProvider>
-                    <div className={classes.buttonMore}>
-                        <IconButton onClick={() => router.push('/reportlist')}>
-                            <ArrowForwardIosOutlinedIcon />
-                        </IconButton>
-                    </div>
-                </Grid>
-            </Grid>
             <Grid container spacing={2} className={classes.date__block}>
                 <Grid item lg={12}>
                     <Typography>
@@ -192,117 +144,45 @@ const report = () => {
                     </Card>
                 </Grid>
             </Grid>
-            <ResponsiveContainer>
-                <div />
-            </ResponsiveContainer>
-            <Grid container spacing={2} className={classes.date__block}>
+            <Grid container spacing={2} className={classes.chart}>
                 <Grid item lg={12}>
                     <Typography>
-                        Daily Stats
+                        10th grade statistics for 2021
                     </Typography>
                 </Grid>
                 <Grid item lg={12}>
-                    <Card>
-                        <div className={classes.statsContainer}>
-                            <ResponsiveContainer width='100%' height='100%'>
-                                <LineChart
-                                    data={dailyData}
-                                    style={{ fontFamily: 'Viga' }}
-                                >
-                                    <CartesianGrid strokeDasharray='3 3' />
-                                    <XAxis dataKey='name' padding={{ left: 30, right: 30 }} />
-                                    <YAxis />
-                                    <Tooltip />
-                                    <Legend />
-                                    <Line type='monotone' dataKey='borrow' stroke='#FFBD39' activeDot={{ r: 4 }} strokeWidth={2}/>
-                                    <Line type='monotone' dataKey='return' stroke='#84D270' activeDot={{ r: 4 }} strokeWidth={2} />
-                                </LineChart>
-                            </ResponsiveContainer>
-                        </div>
+                    <Card className={classes.chart__block}>
+                        <LineChart data={g10y2020} text= {'10th Grade'}/>
                     </Card>
                 </Grid>
+
             </Grid>
-            <Grid container spacing={2} className={classes.date__block}>
+            <Grid container spacing={2} className={classes.chart}>
                 <Grid item lg={12}>
                     <Typography>
-                        Weekly Stats
+                        11th grade statistics for 2021
                     </Typography>
                 </Grid>
                 <Grid item lg={12}>
-                    <Card>
-                        <div className={classes.statsContainer}>
-                            <ResponsiveContainer width='100%' height='100%'>
-                                <LineChart
-                                    data={weeklyData}
-                                    style={{ fontFamily: 'Viga' }}
-                                >
-                                    <CartesianGrid strokeDasharray='3 3' />
-                                    <XAxis dataKey='name' padding={{ left: 30, right: 30 }} />
-                                    <YAxis />
-                                    <Tooltip />
-                                    <Legend />
-                                    <Line type='monotone' dataKey='borrow' stroke='#FFBD39' activeDot={{ r: 4 }} strokeWidth={2} />
-                                    <Line type='monotone' dataKey='return' stroke='#84D270' activeDot={{ r: 4 }} strokeWidth={2} />
-                                </LineChart>
-                            </ResponsiveContainer>
-                        </div>
+                    <Card className={classes.chart__block}>
+                        <LineChart data={g10y2020} text= {'11th Grade'}/>
                     </Card>
                 </Grid>
+
             </Grid>
-            <Grid container spacing={2} className={classes.date__block}>
-                <Grid item lg={12}>
-                    <Typography>
-                        Monthly Stats
-                    </Typography>
-                </Grid>
-                <Grid item lg={12}>
-                    <Card>
-                        <div className={classes.statsContainer}>
-                            <ResponsiveContainer width='100%' height='100%'>
-                                <LineChart
-                                    data={monthlyData}
-                                    style={{ fontFamily: 'Viga' }}
-                                >
-                                    <CartesianGrid strokeDasharray='3 3' />
-                                    <XAxis dataKey='name' padding={{ left: 30, right: 30 }} />
-                                    <YAxis />
-                                    <Tooltip />
-                                    <Legend />
-                                    <Line type='monotone' dataKey='borrow' stroke='#FFBD39' activeDot={{ r: 4 }} strokeWidth={2} />
-                                    <Line type='monotone' dataKey='return' stroke='#84D270' activeDot={{ r: 4 }} strokeWidth={2} />
-                                </LineChart>
-                            </ResponsiveContainer>
-                        </div>
-                    </Card>
-                </Grid>
+            <Grid container spacing={2} className={classes.chart}>
+            <Grid item lg={12}>
+                <Typography>
+                    112th grade statistics for 2021
+                </Typography>
             </Grid>
-            <Grid container spacing={2} className={classes.date__block}>
-                <Grid item lg={12}>
-                    <Typography>
-                        Yearly Stats
-                    </Typography>
-                </Grid>
-                <Grid item lg={12}>
-                    <Card>
-                        <div className={classes.statsContainer}>
-                            <ResponsiveContainer width='100%' height='100%'>
-                                <LineChart
-                                    data={yearlyData}
-                                    style={{ fontFamily: 'Viga' }}
-                                >
-                                    <CartesianGrid strokeDasharray='3 3' />
-                                    <XAxis dataKey='name' padding={{ left: 30, right: 30 }} />
-                                    <YAxis />
-                                    <Tooltip />
-                                    <Legend />
-                                    <Line type='monotone' dataKey='borrow' stroke='#FFBD39' activeDot={{ r: 4 }} strokeWidth={2} />
-                                    <Line type='monotone' dataKey='return' stroke='#84D270' activeDot={{ r: 4 }} strokeWidth={2} />
-                                </LineChart>
-                            </ResponsiveContainer>
-                        </div>
-                    </Card>
-                </Grid>
+            <Grid item lg={12}>
+                <Card className={classes.chart__block}>
+                    <LineChart data={g10y2020} text= {'12th Grade'}/>
+                </Card>
             </Grid>
+
+        </Grid>
         </div>
     );
 }

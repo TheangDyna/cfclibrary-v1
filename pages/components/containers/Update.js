@@ -27,17 +27,18 @@ import {
     KeyboardDatePicker,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import { currentUser } from '../presentaions/data'
 
 const useStyles = makeStyles((theme) => {
     return {
-        signup__form: {
+        update__form: {
             width: '100%',
         },
-        signup__button: {
+        update__button: {
             display: 'block',
             margin: '0 auto'
         },
-        signup__card: {
+        update__card: {
             padding: 20
         },
         body: {
@@ -69,10 +70,6 @@ const useStyles = makeStyles((theme) => {
         radio: {
             paddingLeft: 14
         },
-        bottomLink: {
-            display: 'flex',
-            justifyContent: 'center',
-        },
         closeDialogButton: {
             position: 'absolute',
             right: theme.spacing(1),
@@ -85,19 +82,21 @@ const useStyles = makeStyles((theme) => {
     }
 });
 
-const Signup = ({ close, signin }) => {
+const Update = ({ close }) => {
 
     const classes = useStyles();
     const [values, setValues] = useState({
-        firstName: '',
-        lastName: '',
-        grade: '',
-        password1: '',
+        firstName: currentUser.fname,
+        lastName: currentUser.lname,
+        grade: currentUser.grade,
+        password1: currentUser.password,
         showPassword1: false,
-        password2: '',
+        password2: currentUser.password,
         showPassword2: false,
-        phoneNumber: '',
-        gender: '',
+        phoneNumber: currentUser.phoneNumber,
+        gender: currentUser.gender,
+        address: currentUser.address,
+        profile: currentUser.profile
     });
     const handleChange = (prop) => (e) => {
         setValues({ ...values, [prop]: e.target.value });
@@ -114,7 +113,7 @@ const Signup = ({ close, signin }) => {
     const handleMouseDownPassword = (e) => {
         e.preventDefault();
     };
-    const [selectedDate, setSelectedDate] = useState();
+    const [selectedDate, setSelectedDate] = useState(currentUser.birthDate);
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
@@ -159,18 +158,18 @@ const Signup = ({ close, signin }) => {
     };
     return (
         <div>
-            <div className={classes.signup__form}>
-                <Card className={classes.signup__card}>
+            <div className={classes.update__form}>
+                <Card className={classes.update__card}>
                     <form autoComplete='off'>
                         <div className={classes.head}>
                             <IconButton className={classes.closeDialogButton} onClick={close}>
                                 <CloseIcon />
                             </IconButton>
                             <Typography variant='h5'>
-                                Sign Up To CFC Library
+                                Edit Your Imformatoin
                             </Typography>
                             <Typography color='textSecondary'>
-                                Create your new account by filling the form below.
+                                Edit your imformatoin by filling the form below.
                             </Typography>
                         </div>
                         <Divider className={classes.divider} />
@@ -181,7 +180,7 @@ const Signup = ({ close, signin }) => {
                                         variant='outlined'
                                         type='text'
                                         size='small'
-                                        // value={values.firstName}
+                                        value={values.firstName}
                                         onChange={handleChange('firstName')}
                                         required
                                         label='First Name'
@@ -194,7 +193,7 @@ const Signup = ({ close, signin }) => {
                                         variant='outlined'
                                         type='text'
                                         size='small'
-                                        // value={values.lastName}
+                                        value={values.lastName}
                                         onChange={handleChange('lastName')}
                                         required
                                         label='Last Name'
@@ -202,11 +201,11 @@ const Signup = ({ close, signin }) => {
                                         fullWidth
                                     />
                                 </Grid>
-                                <Grid item sm={12} md={12} lg={12}>
+                                <Grid item sm={12} md={12} lg={6}>
                                     <FormControl required className={classes.radio}>
                                         <FormLabel>Gender</FormLabel>
                                         <RadioGroup
-                                            // value={values.gender}
+                                            value={values.gender}
                                             onChange={handleChange('gender')}
 
                                         >
@@ -217,6 +216,19 @@ const Signup = ({ close, signin }) => {
                                         </RadioGroup>
                                         {/* <FormHelperText>^0^</FormHelperText> */}
                                     </FormControl>
+                                </Grid>
+                                <Grid item sm={12} md={12} lg={6}>
+                                    <TextField
+                                        variant='outlined'
+                                        size='small'
+                                        required
+                                        label='Profile'
+                                        type='text'
+                                        value={values.profile}
+                                        onChange={handleChange('profile')}
+                                        // helperText= '^0^'
+                                        fullWidth
+                                    />
                                 </Grid>
                                 <Grid item sm={12} md={12} lg={12}>
                                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -264,11 +276,23 @@ const Signup = ({ close, signin }) => {
                                         label='Phone Number'
                                         // helperText= '^0^'
                                         fullWidth
-                                        // value={values.phoneNumber}
+                                        value={values.phoneNumber}
                                         InputProps={phoneNumber__textAdornment}
                                         onChange={handleChange('phoneNumber')}
                                         onFocus={e => setIsSelected(true)}
                                         onBlur={values.phoneNumber == '' ? (e => setIsSelected(false)) : (e => setIsSelected(true))}
+                                    />
+                                </Grid>
+                                <Grid item sm={12} md={12} lg={12}>
+                                    <TextField
+                                        variant='outlined'
+                                        type='text'
+                                        size='small'
+                                        value={values.address}
+                                        onChange={handleChange('address')}
+                                        label='Address'
+                                        // helperText= '^0^'
+                                        fullWidth
                                     />
                                 </Grid>
                                 <Grid item sm={12} md={12} lg={6}>
@@ -278,7 +302,7 @@ const Signup = ({ close, signin }) => {
                                         required
                                         label='Create Password'
                                         type={values.showPassword1 ? 'text' : 'password'}
-                                        // value={values.password1}
+                                        value={values.password1}
                                         onChange={handleChange('password1')}
                                         // helperText= '^0^'
                                         fullWidth
@@ -292,7 +316,7 @@ const Signup = ({ close, signin }) => {
                                         required
                                         label='Comfirm Password'
                                         type={values.showPassword2 ? 'text' : 'password'}
-                                        // value={values.password2}
+                                        value={values.password2}
                                         onChange={handleChange('password2')}
                                         // helperText= '^0^'
                                         fullWidth
@@ -300,19 +324,14 @@ const Signup = ({ close, signin }) => {
                                     />
                                 </Grid>
                                 <Grid item sm={6} md={6} lg={6}>
-                                    <Button variant='outlined' color='primary' className={classes.signup__button} onClick={close}>
+                                    <Button variant='outlined' color='primary' className={classes.update__button} onClick={close}>
                                         Back
                                     </Button>
                                 </Grid>
                                 <Grid item sm={6} md={6} lg={6}>
-                                    <Button variant='contained' color='primary' type='submit' className={classes.signup__button}>
-                                        Sign Up
+                                    <Button variant='contained' color='primary' type='submit' className={classes.update__button}>
+                                        Update
                                     </Button>
-                                </Grid>
-                                <Grid item sm={12} md={12} lg={12} className={classes.bottomLink}>
-                                    <Typography>
-                                        Already have an account? <Link className={classes.link} onClick={signin}>SignIn Now</Link>
-                                    </Typography>
                                 </Grid>
                             </Grid>
                         </div>
@@ -323,4 +342,4 @@ const Signup = ({ close, signin }) => {
     );
 }
 
-export default Signup;
+export default Update;

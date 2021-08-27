@@ -16,22 +16,16 @@ import {
     Dialog,
     Button,
 } from '@material-ui/core';
-import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
-import LibraryBooksOutlinedIcon from '@material-ui/icons/LibraryBooksOutlined';
-import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
-import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import ForumOutlinedIcon from '@material-ui/icons/ForumOutlined';
-import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import BookmarkOutlinedIcon from '@material-ui/icons/BookmarkOutlined';
-import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
+import LaunchOutlinedIcon from '@material-ui/icons/LaunchOutlined';
 import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
 import { useRouter } from 'next/router';
-import Signup from './Signup';
+import CtrlAuth from './CtrlAuth'
 import Signin from './Signin';
+import { menuItems } from '../presentaions/data';
+import { FormatColorResetSharp } from '@material-ui/icons';
 
 
 const drawerWidth = 200;
@@ -104,65 +98,13 @@ const Navbar = () => {
 
     const handleClickSublist = () => {
         setOpen(!open);
+
     };
-    const menuItems = [
-        {
-            text: 'home',
-            icon: <HomeOutlinedIcon />,
-            path: '/',
-            sublist: 0
-        },
-        {
-            text: 'Library',
-            icon: <LibraryBooksOutlinedIcon />,
-            path: '/library',
-            sublist: 0
-        },
-        {
-            text: 'Profile',
-            icon: <AccountCircleOutlinedIcon />,
-            sublist: 1,
-            subListMenu: [
-                {
-                    text: 'History',
-                    icon: <HistoryOutlinedIcon />,
-                    path: '/',
-                },
-                {
-                    text: 'Wish List',
-                    icon: <BookmarkOutlinedIcon />,
-                    path: '/',
-                },
-                {
-                    text: 'Account',
-                    icon: <SettingsOutlinedIcon />,
-                    path: '/',
-                }
-            ]
-        },
-        {
-            text: 'Report',
-            icon: <AssessmentOutlinedIcon />,
-            path: '/report',
-            sublist: 0
-        },
-        {
-            text: 'About',
-            icon: <InfoOutlinedIcon />,
-            path: '/about',
-            sublist: 0
-        },
-        {
-            text: 'Contact',
-            icon: <ForumOutlinedIcon /*style={{color: 'gray'}}*/ />,
-            path: '/contact',
-            sublist: 0
-        }
-    ];
+    const [openCtrlAuth, setOpenCtrlAuth] = useState(false);
+    const [openIn, setOpenIn] = useState('');
 
-    const [openSignup, setOpenSignup] = useState(false);
-    const [openSignin, setOpenSignin] = useState(false);
-
+    const signined = true;
+    const usered = true;
     return (
         <div>
             <AppBar
@@ -179,17 +121,25 @@ const Navbar = () => {
                         Welcome to Aranh CFC Library
                     </Typography>
                     <div className={classes.flexGrow} />
-                    <IconButton>
-                        <Badge badgeContent={100} color='secondary' max={9}>
-                            <NotificationsNoneOutlinedIcon />
-                        </Badge>
-                    </IconButton>
-                    <Avatar className={classes.appbar__avatar}>
-                        {user[0].toUpperCase()}
-                    </Avatar>
-                    <Button variant='contained' color='primary' className={classes.signin__button} onClick={() => setOpenSignin(true)}>
-                        Sign In
-                    </Button>
+                    {
+                        signined ?
+                            (
+                                <div style={{ display: 'flex' }}>
+                                    <IconButton>
+                                        <Badge badgeContent={100} color='secondary' max={9}>
+                                            <NotificationsNoneOutlinedIcon />
+                                        </Badge>
+                                    </IconButton>
+                                    <Avatar className={classes.appbar__avatar}>
+                                        {user[0].toUpperCase()}
+                                    </Avatar>
+                                </div>
+                            ) : (
+                                <Button variant='contained' color='primary' className={classes.signin__button} onClick={() => { setOpenCtrlAuth(true), setOpenIn('signin') }}>
+                                    Sign In
+                                </Button>
+                            )
+                    }
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -215,7 +165,7 @@ const Navbar = () => {
                                     <ListItem
                                         button
                                         key={item.text}
-                                        onClick={() => router.push(item.path)}
+                                        onClick={() => { router.push(item.path)}}
                                         className={router.pathname == item.path ? classes.active : null}
                                     >
                                         <ListItemIcon className={router.pathname == item.path ? classes.active__icon : null}>{item.icon}</ListItemIcon>
@@ -226,19 +176,45 @@ const Navbar = () => {
                                         <ListItem
                                             button
                                             onClick={handleClickSublist}
+                                            className={
+                                                router.pathname == '/profile/history'? classes.active
+                                                :router.pathname == '/profile/wishlist'? classes.active
+                                                :router.pathname == '/profile/account'? classes.active
+                                                :router.pathname == '/profile/bookList'? classes.active
+                                                :router.pathname == '/profile/userList'? classes.active
+                                                : null}
                                         >
-                                            <ListItemIcon>{item.icon}</ListItemIcon>
+                                            <ListItemIcon className={
+                                                router.pathname == '/profile/history'? classes.active__icon
+                                                :router.pathname == '/profile/wishlist'? classes.active__icon
+                                                :router.pathname == '/profile/account'? classes.active__icon
+                                                :router.pathname == '/profile/bookList'? classes.active__icon
+                                                :router.pathname == '/profile/userList'? classes.active__icon
+                                                : null}>
+                                                    {item.icon}
+                                                    </ListItemIcon>
                                             <ListItemText primary={item.text} />
                                             {open ? <ExpandLess /> : <ExpandMore />}
                                         </ListItem>
                                         <Collapse in={open} timeout='auto' unmountOnExit>
                                             <List component='div' disablePadding className={classes.sublist}>
-                                                {item.subListMenu.map((subItem) => (
-                                                    <ListItem button key={subItem.text} >
-                                                        <ListItemIcon>{subItem.icon}</ListItemIcon>
-                                                        <ListItemText primary={subItem.text} />
-                                                    </ListItem>
-                                                ))}
+                                                {
+                                                    usered ? (
+                                                        item.subListMenu.map((subItem) => (
+                                                            <ListItem button key={subItem.text} onClick={() => { router.push(subItem.path)}}>
+                                                                <ListItemIcon>{subItem.icon}</ListItemIcon>
+                                                                <ListItemText primary={subItem.text} />
+                                                            </ListItem>
+                                                        ))
+                                                    ) : (
+                                                        item.subListAdmin.map((subItem) => (
+                                                            <ListItem button key={subItem.text} onClick={() => { router.push(subItem.path)}}>
+                                                                <ListItemIcon>{subItem.icon}</ListItemIcon>
+                                                                <ListItemText primary={subItem.text} />
+                                                            </ListItem>
+                                                        ))
+                                                    )
+                                                }
                                             </List>
                                         </Collapse>
                                     </div>
@@ -248,26 +224,41 @@ const Navbar = () => {
                     </div>
                     <div className={classes.bottom__list}>
                         <List>
-                            <ListItem
-                                button
-                                // onClick={() => router.push('/loguot')}
-                                onClick={() => setOpenSignup(true)}
-                            >
-                                <ListItemIcon>
-                                    <ExitToAppOutlinedIcon />
-                                </ListItemIcon>
-                                <ListItemText primary='Sign Up' />
-                            </ListItem>
+                            {
+                                signined ?
+                                    (
+                                        <ListItem
+                                            button
+                                        // onClick={() => router.push('/Sign Out')}
+                                        >
+                                            <ListItemIcon>
+                                                <ExitToAppOutlinedIcon style={{ transform: 'rotate(-180deg)' }} />
+                                            </ListItemIcon>
+                                            <ListItemText primary='Sign Out' />
+                                        </ListItem>
+
+                                    ) : (
+
+                                        <ListItem
+                                            button
+                                            onClick={() => router.push('/loguot')}
+                                            onClick={() => { setOpenCtrlAuth(true), setOpenIn('signup') }}
+                                        >
+                                            <ListItemIcon>
+                                                <LaunchOutlinedIcon />
+                                            </ListItemIcon>
+                                            <ListItemText primary='Sign Up' />
+                                        </ListItem>
+                                    )
+                            }
                         </List>
                     </div>
                 </div>
             </Drawer>
-            <Dialog open={openSignup}>
-                <Signup close={() => setOpenSignup(false)} />
+            <Dialog open={openCtrlAuth}>
+                <CtrlAuth close={() => setOpenCtrlAuth(false)} open={openIn} />
             </Dialog>
-            <Dialog open={openSignin}>
-                <Signin close={() => setOpenSignin(false)} />
-            </Dialog>
+
         </div>
     );
 }

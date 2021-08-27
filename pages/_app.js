@@ -3,11 +3,11 @@ import { createTheme, ThemeProvider } from '@material-ui/core'
 import Layout from './components/containers/Layout'
 
 const theme = createTheme({
-  typography:{
+  typography: {
     fontFamily: 'Viga',
   },
   palette: {
-    primary:{
+    primary: {
       light: '#22c4ab',
       main: '#1eae98',
       dark: '#1a9885',
@@ -17,13 +17,13 @@ const theme = createTheme({
 })
 
 function MyApp({ Component, pageProps }) {
-    return (
-      <ThemeProvider theme={theme}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>  
-    )
+  return (
+    <ThemeProvider theme={theme}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </ThemeProvider>
+  )
 }
 
 export default MyApp
