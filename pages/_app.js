@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import { createTheme, ThemeProvider } from '@material-ui/core'
 import Layout from './components/containers/Layout'
+import Footer from './components/containers/Footer'
 
 const theme = createTheme({
   typography: {
@@ -17,13 +18,14 @@ const theme = createTheme({
 })
 
 function MyApp({ Component, pageProps }) {
-  return (
-    <ThemeProvider theme={theme}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ThemeProvider>
-  )
+    return (
+      <ThemeProvider theme={theme}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+        <Footer />
+      </ThemeProvider>  
+    )
 }
 
 export default MyApp
