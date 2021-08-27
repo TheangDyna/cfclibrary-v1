@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Paper, Typography, Button } from '@material-ui/core';
+import { Grid, Paper, Typography, Button, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,22 +19,20 @@ const useStyles = makeStyles((theme) => ({
         width: `100%`
     },
     h1: {
-        margin: 30,
+        marginTop: 30,
+        marginBottom: 30,
         fontSize: 24,
+        width:`100%`,
+        padding:10,
+        backgroundColor:'#1eae98',
+        color: 'white',
     },
     Header: {
         backgroundRepeat: `no repeat`,
         backgroundSize: `cover`,
-        backgroundImage: `url("https://media.gettyimages.com/photos/bookshelves-tables-with-chairs-in-library-picture-id1201866998?k=6&m=1201866998&s=612x612&w=0&h=_uuhtgpww3Ia7vdMYrDDWc_VN-EVBf8Cp3HXjQ2cww0=")`,
+        backgroundImage: `url("https://1.bp.blogspot.com/-iRJJnnVH1kI/Xnc1uIRip0I/AAAAAAAAEzA/xo3YIBUWE0szl9ZWR2dU6alK2plXLE6XwCLcBGAsYHQ/w1200-h630-p-k-no-nu/Anime%2BLibrary%2BBackground%2B2.png")`,
         width: `100%`,
        
-    },
-    
-    BgImage: {
-        height: '100%',
-    },
-    BgImage1: {
-        height: '100%',
     },
     button: {
         margin: 20,
@@ -45,45 +43,69 @@ const useStyles = makeStyles((theme) => ({
         width: `50%`,
         textAlign: 'center',
         paddingTop: 50,
-        backgroundColor:`rgba(255,255,255,0.6)`
+        backgroundColor:`rgba(255,255,255,0.8)`
 
     },
     logo: {
         marginTop: 20,
         marginBottom: 20,
     },
+    BgImage1 :{
+        display:'block',
+        width:`50%`,
+    },
     footer:{
-        backgroundColor: "Black",
+        marginTop:50,
+        backgroundColor:'#1eae98',
         width:`100%`,
         height:300,
+        padding : 30,
+    },
+    textFooter:{
+
+        color: 'white',    
+
+    },
+    divider: {
+        marginTop: 20,
+        background: '#1eae98',
+        
+    },
+    mainFooter:{
+        color:'white',
+    },
+    h3:{
+        marginBottom:20,
+        fontFamily: 'Viga',
+    },
+    choose:{
+        marginTop:30,
+    },
+    slideImage:{
+        textAlign: 'center',
     }
+
 }));
 export default function HomePage() {
     const classes = useStyles();
     const MathBooks = [
         {
             type: "Math",
-            img: "https://img.freepik.com/free-vector/realistic-bokeh-background_23-2148987168.jpg?size=626&ext=jpg",
         },
         {
             type: "Biogy",
-            img: "https://img.freepik.com/free-vector/realistic-bokeh-background_23-2148987168.jpg?size=626&ext=jpg",
         },
         {
             type: "History",
-            img: "https://img.freepik.com/free-vector/realistic-bokeh-background_23-2148987168.jpg?size=626&ext=jpg",
         },
         {
             type: "Art",
-            img: "https://img.freepik.com/free-vector/realistic-bokeh-background_23-2148987168.jpg?size=626&ext=jpg",
         },
         {
             type: "Cooking",
-            img: "https://img.freepik.com/free-vector/realistic-bokeh-background_23-2148987168.jpg?size=626&ext=jpg",
         },
         {
             type: "Health",
-            img: "https://img.freepik.com/free-vector/realistic-bokeh-background_23-2148987168.jpg?size=626&ext=jpg",
         },
     ]
 
@@ -135,6 +157,44 @@ export default function HomePage() {
             img: "https://images-na.ssl-images-amazon.com/images/I/81xfbcYf98L._AC_UL160_SR160,160_.jpg",
         },
     ];
+    const newBooks = [
+        {
+            img :"https://www.mitpurnia.org/img/lib2.jpg",
+        },
+        {
+            img :"https://www.mitpurnia.org/img/lib2.jpg",
+        },
+        {
+            img :"https://www.mitpurnia.org/img/lib2.jpg",
+        },
+        {
+            img :"https://www.mitpurnia.org/img/lib2.jpg",
+        },
+        {
+            img :"https://www.mitpurnia.org/img/lib2.jpg",
+        },
+        {
+            img :"https://www.mitpurnia.org/img/lib2.jpg",
+        },
+        {
+            img :"https://www.mitpurnia.org/img/lib2.jpg",
+        },
+        {
+            img :"https://www.mitpurnia.org/img/lib2.jpg",
+        },
+        {
+            img :"https://www.mitpurnia.org/img/lib2.jpg",
+        },
+        {
+            img :"https://www.mitpurnia.org/img/lib2.jpg",
+        },
+        {
+            img :"https://www.mitpurnia.org/img/lib2.jpg",
+        },
+        {
+            img :"https://www.mitpurnia.org/img/lib2.jpg",
+        },
+    ];
     return (
         <div className={classes.root}>
           <div className= {classes.Header}>
@@ -142,18 +202,19 @@ export default function HomePage() {
                     <div align='center' className={classes.logo}>
                         <img src='images/logo.png' width='200px' />
                     </div>
-
-                    <Typography variant='h4'>Welcome to CFC Library</Typography>
+                    <Typography variant='h4'color='primary'>Welcome to CFC Library</Typography>
                         <Typography>We believe that reading opens doors, and part of our mission is to change the way the world reads by providing a wide range of reading material in both print and audio formats at a price that is fair for both creators and consumers.</Typography>
                         <Button className={classes.button} variant='contained' color='primary'>
                             Get Start
                         </Button>
-                    </div>
-
+                     </div>
             </div>
-
-
-
+            <div className={classes.choose}>
+                <Button href="#text-buttons" color="primary">Type Of Book</Button>
+                <Button href="#text-buttons" color="primary">Top Borrow Book</Button>
+                <Button href="#text-buttons" color="primary">New Arrival</Button>
+            </div>
+            <Divider className={classes.divider}/>
             <Typography className={classes.h1}>Type of book</Typography>
             <Grid container spacing={3}>
                 {MathBooks.map((MathBook, index) => (
@@ -179,11 +240,20 @@ export default function HomePage() {
                     </Grid>
                 ))}
             </Grid>
-            <div className={classes.footer}>
-                <div>
-                    
-                </div>
-            </div>
+                <Typography className={classes.h1}>New Arrival</Typography>
+            <Grid container spacing={3}>
+                {newBooks.map((newBook, index) => (
+                    <Grid key={index} className={classes.main} item xs={12} sm={6} md={3} lg={2}>
+                        <Paper>
+                            <div className={classes.media}>
+                                <img className={classes.image} src={newBook.img} />
+                            </div>
+                        </Paper>
+                    </Grid>
+                ))}
+            </Grid>
+           
+           
         </div>
     )
 }
