@@ -1,15 +1,34 @@
-import React from "react";  
-import { Dialog } from "@material-ui/core";
-import Update from "./components/containers/ComfirmPass" ;
+import React, {useEffect, useState} from "react";
+import "react-multi-carousel/lib/styles.css";
+import {
+  makeStyles,
+  Grid,
+  Typography,
+  Button,
+  Card,
+  CardMedia,
+  Link
+} from '@material-ui/core';
+const useStyles = makeStyles((theme) => ({
 
 
-export default function test() {
+}));
 
+const test = () => {
+  const classes = useStyles();
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    fetch('http://localhost:8000/users')
+        .then(res => res.json())
+        .then(data => setUsers(data))
+}, [])
   return (
-    <div >
-      <Dialog open={true}> 
-        <Update />
-      </Dialog>
-     </div> 
+    <div>
+      {users.map(user => (
+        <Typography key={user.firstName}>{user.firstName}</Typography>
+      ))}
+    </div >
   );
 }
+
+export default test;

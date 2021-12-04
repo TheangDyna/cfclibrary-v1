@@ -1,7 +1,6 @@
-import '../styles/globals.css'
-import { createTheme, ThemeProvider } from '@material-ui/core'
-import Layout from './components/containers/Layout'
-import Footer from './components/containers/Footer'
+import '../styles/globals.css';
+import { createTheme, ThemeProvider } from '@material-ui/core';
+import Layout from './components/containers/Layout';
 
 const theme = createTheme({
   typography: {
@@ -23,7 +22,6 @@ function MyApp({ Component, pageProps }) {
         <Layout>
           <Component {...pageProps} />
         </Layout>
-        <Footer />
       </ThemeProvider>  
     )
 }

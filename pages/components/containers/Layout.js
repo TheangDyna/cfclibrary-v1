@@ -1,5 +1,6 @@
 import Navbar from './Navbar';
 import { makeStyles } from '@material-ui/core';
+import Footer from '../containers/Footer';
 
 const useStyles = makeStyles((theme) => {
     return {
@@ -8,10 +9,8 @@ const useStyles = makeStyles((theme) => {
         },
         page: {
             background: '#F9F9F9',
-            width: '100%',
-            paddingLeft: theme.spacing(3),
-            paddingRight: theme.spacing(3),
-            paddingTop: theme.spacing(3),
+            width: 'calc(100% - 200px)',
+            padding: theme.spacing(3)
         },
         toolbar: theme.mixins.toolbar,
     }
@@ -23,8 +22,9 @@ const Layout = ({children}) => {
         <div className={classes.root}>
             <Navbar />
             <div className={classes.page}>
-                <div className={classes.toolbar}></div>
+                <div className={classes.toolbar} />
                 {children}
+                <Footer />
             </div>
         </div>
      );

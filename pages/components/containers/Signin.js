@@ -75,7 +75,7 @@ const Signin = ({close, signup, reset}) => {
     const classes = useStyles();
     const [values, setValues] = useState({
         password: '',
-        showPassword: false,   
+        showPassword: false,
         phoneNumber: '',
 });
 const handleChange = (prop) => (e) => {

@@ -20,29 +20,97 @@ import {
     Dialog,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { addBookCategories } from '../presentaions/data'
+
+const addBookCategories = [
+    {
+        title: 'Arts & Music',
+    },
+    {
+        title: 'Biographies',
+    },
+    {
+        title: 'Business',
+    },
+    {
+        title: 'Comics',
+    },
+    {
+        title: 'Computers & Tech',
+    },
+    {
+        title: 'Cooking',
+    },
+    {
+        title: 'Edu & Reference',
+    },
+    {
+        title: 'Entertainment',
+    },
+    {
+        title: 'Health & Fitness',
+    },
+    {
+        title: 'History',
+    },
+    {
+        title: 'Hobbies & Crafts',
+    },
+    {
+        title: 'Home & Garden',
+    },
+    {
+        title: 'Horror',
+    },
+    {
+        title: 'Kids',
+    },
+    {
+        title: 'Literature & Fiction',
+    },
+    {
+        title: 'Medical',
+    },
+    {
+        title: 'Mysteries',
+    },
+    {
+        title: 'Parenting',
+    },
+    {
+        title: 'Religion',
+    },
+    {
+        title: 'Romance',
+    },
+    {
+        title: 'Science & Math',
+    },
+    {
+        title: 'Self-Help',
+    },
+    {
+        title: 'Social Sciences',
+    },
+    {
+        title: 'Sports',
+    },
+    {
+        title: 'Teen',
+    },
+    {
+        title: 'Travel',
+    },
+    {
+        title: 'Website',
+    },
+    {
+        title: 'Other',
+    },
+];
+
 
 const useStyles = makeStyles((theme) => {
     return {
-        // root: {
-        //     '& label.Mui-focused': {
-        //     color: 'white',
-        //     },
-        //     '& .MuiInput-underline:after': {
-        //     borderBottomColor: 'yellow',
-        //     },
-        //     '& .MuiOutlinedInput-root': {
-        //         '& fieldset': {
-        //             borderColor: 'white',
-        //         },
-        //         '&:hover fieldset': {
-        //             borderColor: 'white',
-        //         },
-        //         '&.Mui-focused fieldset': {
-        //             borderColor: 'yellow',
-        //         },
-        //     },
-        // },
         addBook__form: {
             width: `100%`,
             // margin: '0 auto'
@@ -116,11 +184,32 @@ const AddBooks = ({ close }) => {
     const handleChange = (prop) => (e) => {
         setValues({ ...values, [prop]: e.target.value });
     };
+    const handleSubmit = (e) => {
+        if (localStorage.getItem("books") == null || undefined) {
+            localStorage.setItem("books", "[]");
+        }
+        var getBooks = localStorage.getItem("books");
+        var objBooks = JSON.parse(getBooks);
+        let newBook = {
+            title: values.title,
+            url: values.url,
+            gender: values.author,
+            author: values.sponsor,
+            grade: values.categories,
+            phoneNumber: values.subCategories,
+            password: values.condition,
+            profile: values.amount,
+            address: values.descripsion
+        };
+        objBooks.push(newBook);
+        localStorage.setItem("books", JSON.stringify(objBooks));
+        e.preventDefault();
+    }
     return (
         <div>
             <div className={classes.addBook__form}>
                 <Card className={classes.addBook__card}>
-                    <form autoComplete='off'>
+                    <form autoComplete='off' onSubmit={handleSubmit}>
                         <div className={classes.head}>
                             <IconButton className={classes.closeDialogButton} onClick={close}>
                                 <CloseIcon />
@@ -168,7 +257,6 @@ const AddBooks = ({ close }) => {
                                         size='small'
                                         // value={values.author}
                                         onChange={handleChange('author')}
-                                        required
                                         label='Author'
                                         // helperText= '^0^'
                                         fullWidth
@@ -196,7 +284,7 @@ const AddBooks = ({ close }) => {
                                         fullWidth
                                         size='small'
                                         onChange={handleChange('categories')}
-                                    // value={values.categories}
+                                        value={values.categories}
                                     >
                                         {addBookCategories.map((bookCategory, index) => (
                                             <MenuItem
@@ -216,7 +304,7 @@ const AddBooks = ({ close }) => {
                                         fullWidth
                                         size='small'
                                         onChange={handleChange('subCategories')}
-                                    // value={values.subCategories}
+                                        value={values.subCategories}
                                     >
                                         {addBookCategories.map((bookCategory, index) => (
                                             <MenuItem

@@ -22,11 +22,6 @@ import {
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import CloseIcon from '@material-ui/icons/Close';
-import {
-    MuiPickersUtilsProvider,
-    KeyboardDatePicker,
-} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
 
 const useStyles = makeStyles((theme) => {
     return {
@@ -98,6 +93,7 @@ const Signup = ({ close, signin }) => {
         showPassword2: false,
         phoneNumber: '',
         gender: '',
+        date: '',
     });
     const handleChange = (prop) => (e) => {
         setValues({ ...values, [prop]: e.target.value });
@@ -113,11 +109,6 @@ const Signup = ({ close, signin }) => {
 
     const handleMouseDownPassword = (e) => {
         e.preventDefault();
-    };
-    const [selectedDate, setSelectedDate] = useState();
-
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
     };
 
     const [isSelected, setIsSelected] = useState(false);
@@ -157,11 +148,30 @@ const Signup = ({ close, signin }) => {
             </InputAdornment>
         )
     };
+    const handleSubmit = (e) => {
+        var getUsers = localStorage.getItem("registered");
+        var objUsers = JSON.parse(getUsers);
+        let newUser = {
+            fname: values.firstName,
+            lname: values.lastName,
+            gender: values.gender,
+            birthDate: values.date,
+            grade: values.grade,
+            phoneNumber: values.phoneNumber,
+            password: values.password1,
+            profile: '',
+            address: '',
+            wishList: []
+        };
+        objUsers.push(newUser);
+        localStorage.setItem("registered", JSON.stringify(objUsers));
+        e.preventDefault();
+    }
     return (
         <div>
             <div className={classes.signup__form}>
                 <Card className={classes.signup__card}>
-                    <form autoComplete='off'>
+                    <form autoComplete='off' onSubmit={handleSubmit}>
                         <div className={classes.head}>
                             <IconButton className={classes.closeDialogButton} onClick={close}>
                                 <CloseIcon />
@@ -218,21 +228,23 @@ const Signup = ({ close, signin }) => {
                                         {/* <FormHelperText>^0^</FormHelperText> */}
                                     </FormControl>
                                 </Grid>
-                                <Grid item sm={12} md={12} lg={12}>
-                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                        <KeyboardDatePicker
-                                            required
-                                            variant='inline'
-                                            inputVariant='outlined'
-                                            label='Birth Date'
-                                            size='small'
-                                            format='dd/MMMM/yyyy'
-                                            // helperText= '^0^'
-                                            fullWidth
-                                            value={selectedDate}
-                                            onChange={handleDateChange}
-                                        />
-                                    </MuiPickersUtilsProvider>
+                                <Grid item sm={12} md={12} lg={6}>
+                                    <TextField
+                                        variant='outlined'
+                                        type='date'
+                                        size='small'
+                                        format='dd/MMMM/yyyy'
+                                        // value={values.lastName}
+                                        onChange={handleChange('date')}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        defaultValue="2000-01-01"
+                                        required
+                                        label='Birth Date'
+                                        // helperText= '^0^'
+                                        fullWidth
+                                    />
                                 </Grid>
                                 <Grid item sm={12} md={12} lg={12}>
                                     <TextField

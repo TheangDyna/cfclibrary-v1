@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import {
     makeStyles,
     Badge,
@@ -22,10 +22,90 @@ import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import LaunchOutlinedIcon from '@material-ui/icons/LaunchOutlined';
 import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
 import { useRouter } from 'next/router';
-import CtrlAuth from './CtrlAuth'
-import Signin from './Signin';
-import { menuItems } from '../presentaions/data';
-import { FormatColorResetSharp } from '@material-ui/icons';
+import CtrlAuth from './CtrlAuth';
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
+import LibraryBooksOutlinedIcon from '@material-ui/icons/LibraryBooksOutlined';
+import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
+import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import ForumOutlinedIcon from '@material-ui/icons/ForumOutlined';
+import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
+import BookmarkOutlinedIcon from '@material-ui/icons/BookmarkOutlined';
+import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
+import GroupOutlinedIcon from '@material-ui/icons/GroupOutlined';
+
+const menuItems = [
+    {
+        text: 'Home',
+        icon: <HomeOutlinedIcon />,
+        path: '/',
+        sublist: 0
+    },
+    {
+        text: 'Library',
+        icon: <LibraryBooksOutlinedIcon />,
+        path: '/library',
+        sublist: 0
+    },
+    {
+        text: 'Profile',
+        icon: <AccountCircleOutlinedIcon />,
+        sublist: 1,
+        subListMenu: [
+            {
+                text: 'History',
+                icon: <HistoryOutlinedIcon />,
+                path: '/profile/history',
+            },
+            {
+                text: 'Wish List',
+                icon: <BookmarkOutlinedIcon />,
+                path: '/profile/wishlist',
+            },
+            {
+                text: 'Account',
+                icon: <SettingsOutlinedIcon />,
+                path: '/profile/account',
+            }
+        ],
+        subListAdmin: [
+            {
+                text: 'Book List',
+                icon: <LibraryBooksOutlinedIcon />,
+                path: '/profile/bookList',
+            },
+            {
+                text: 'Student List',
+                icon: <GroupOutlinedIcon />,
+                path: '/profile/userList',
+            },
+            {
+                text: 'Account',
+                icon: <SettingsOutlinedIcon />,
+                path: '/profile/account',
+            }
+        ]
+    },
+    {
+        text: 'Report',
+        icon: <AssessmentOutlinedIcon />,
+        path: '/report',
+        sublist: 0
+    },
+    {
+        text: 'About',
+        icon: <InfoOutlinedIcon />,
+        path: '/about',
+        sublist: 0
+    },
+    {
+        text: 'Contact',
+        icon: <ForumOutlinedIcon />,
+        path: '/contact',
+        sublist: 0
+    }
+];
+
 
 
 const drawerWidth = 200;
@@ -103,8 +183,22 @@ const Navbar = () => {
     const [openCtrlAuth, setOpenCtrlAuth] = useState(false);
     const [openIn, setOpenIn] = useState('');
 
-    const signined = true;
-    const usered = true;
+    const signined = false;
+    const usered = false;
+    useEffect(() => {
+        var getUsers = localStorage.getItem("registered");
+        var objUsers = JSON.parse(getUsers);
+        if(objUsers== null || undefined){
+            let adminUser = {
+                lname: "Admin",
+                phoneNumber: "12345678",
+                password:"admin@gmail.com"
+            }
+            let users = [];
+            users.push(adminUser);
+            localStorage.setItem("registered", JSON.stringify(users));
+        }
+    })
     return (
         <div>
             <AppBar
@@ -165,7 +259,7 @@ const Navbar = () => {
                                     <ListItem
                                         button
                                         key={item.text}
-                                        onClick={() => { router.push(item.path)}}
+                                        onClick={() => { router.push(item.path) }}
                                         className={router.pathname == item.path ? classes.active : null}
                                     >
                                         <ListItemIcon className={router.pathname == item.path ? classes.active__icon : null}>{item.icon}</ListItemIcon>
@@ -177,22 +271,22 @@ const Navbar = () => {
                                             button
                                             onClick={handleClickSublist}
                                             className={
-                                                router.pathname == '/profile/history'? classes.active
-                                                :router.pathname == '/profile/wishlist'? classes.active
-                                                :router.pathname == '/profile/account'? classes.active
-                                                :router.pathname == '/profile/bookList'? classes.active
-                                                :router.pathname == '/profile/userList'? classes.active
-                                                : null}
+                                                router.pathname == '/profile/history' ? classes.active
+                                                    : router.pathname == '/profile/wishlist' ? classes.active
+                                                        : router.pathname == '/profile/account' ? classes.active
+                                                            : router.pathname == '/profile/bookList' ? classes.active
+                                                                : router.pathname == '/profile/userList' ? classes.active
+                                                                    : null}
                                         >
                                             <ListItemIcon className={
-                                                router.pathname == '/profile/history'? classes.active__icon
-                                                :router.pathname == '/profile/wishlist'? classes.active__icon
-                                                :router.pathname == '/profile/account'? classes.active__icon
-                                                :router.pathname == '/profile/bookList'? classes.active__icon
-                                                :router.pathname == '/profile/userList'? classes.active__icon
-                                                : null}>
-                                                    {item.icon}
-                                                    </ListItemIcon>
+                                                router.pathname == '/profile/history' ? classes.active__icon
+                                                    : router.pathname == '/profile/wishlist' ? classes.active__icon
+                                                        : router.pathname == '/profile/account' ? classes.active__icon
+                                                            : router.pathname == '/profile/bookList' ? classes.active__icon
+                                                                : router.pathname == '/profile/userList' ? classes.active__icon
+                                                                    : null}>
+                                                {item.icon}
+                                            </ListItemIcon>
                                             <ListItemText primary={item.text} />
                                             {open ? <ExpandLess /> : <ExpandMore />}
                                         </ListItem>
@@ -201,14 +295,14 @@ const Navbar = () => {
                                                 {
                                                     usered ? (
                                                         item.subListMenu.map((subItem) => (
-                                                            <ListItem button key={subItem.text} onClick={() => { router.push(subItem.path)}}>
+                                                            <ListItem button key={subItem.text} onClick={() => { router.push(subItem.path) }}>
                                                                 <ListItemIcon>{subItem.icon}</ListItemIcon>
                                                                 <ListItemText primary={subItem.text} />
                                                             </ListItem>
                                                         ))
                                                     ) : (
                                                         item.subListAdmin.map((subItem) => (
-                                                            <ListItem button key={subItem.text} onClick={() => { router.push(subItem.path)}}>
+                                                            <ListItem button key={subItem.text} onClick={() => { router.push(subItem.path) }}>
                                                                 <ListItemIcon>{subItem.icon}</ListItemIcon>
                                                                 <ListItemText primary={subItem.text} />
                                                             </ListItem>
@@ -241,7 +335,6 @@ const Navbar = () => {
 
                                         <ListItem
                                             button
-                                            onClick={() => router.push('/loguot')}
                                             onClick={() => { setOpenCtrlAuth(true), setOpenIn('signup') }}
                                         >
                                             <ListItemIcon>

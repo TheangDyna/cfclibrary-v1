@@ -19,7 +19,16 @@ import {
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { userList } from '../components/presentaions/data'
+
+function createDataUserList(id, fname, lname, gender, grade, birthdate, phoneNumber, password, address) {
+  return { id, fname, lname, gender, grade, birthdate, phoneNumber, password, address };
+};
+const userList = [
+  createDataUserList('000001', 'Teang', 'Dyna', 'Male', '12 A', '09-04-2003', '15 367 150', 'Bad Boy 365?', 'Aranh, Siem Reap, Siem Reap'),
+  createDataUserList('000002', 'Teang', 'Dyna', 'Male', '12 A', '09-04-2003', '15 367 150', 'Bad Boy 365?', 'Por, Siem Reap, Siem Reap'),
+  createDataUserList('000003', 'Teang', 'Dyna', 'Male', '12 A', '09-04-2003', '15 367 150', 'Bad Boy 365?', 'Phnom Krom, Siem Reap, Siem Reap'),
+  
+];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {

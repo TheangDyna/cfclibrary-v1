@@ -14,7 +14,21 @@ import {
   Typography,
   Toolbar
 } from '@material-ui/core';
-import { historyCurrentUser } from '../components/presentaions/data';
+import Banner from '../components/presentaions/Banner';
+
+function createDataUserHistoryList(date, bookTitle, action) {
+  return { date, bookTitle, action };
+}
+
+const historyCurrentUser = [
+  createDataUserHistoryList('08-01-2021', 'Hello kid1', 'Borrow'),
+  createDataUserHistoryList('08-05-2021', 'Hello kid2', 'Return'),
+  createDataUserHistoryList('08-06-2021', 'Hello kid3', 'Return'),
+  createDataUserHistoryList('08-07-2021', 'Hello kid4', 'Return'),
+  createDataUserHistoryList('08-08-2021', 'Hello kid5', 'Expired'),
+  createDataUserHistoryList('08-10-2021', 'Hello kid6', 'Expired'),
+];
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -130,46 +144,48 @@ export default function EnhancedTable() {
     setOrderBy(property);
   };
   return (
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <Toolbar>
-          <Typography>
-            History
-          </Typography>
-        </Toolbar>
-        <TableContainer>
-          <Table>
-            <EnhancedTableHead
-              classes={classes}
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
-            />
-            <TableBody>
-              {stableSort(historyCurrentUser, getComparator(order, orderBy))
-                .map((row) => {
-                  return (
-                    <TableRow
-                      hover
-                      key={row.date}
-                    >
-                      <TableCell />
-                      <TableCell>{row.date}</TableCell>
-                      <TableCell>{row.bookTitle}</TableCell>
-                      <TableCell
-                        className={row.action == 'Borrow' ? classes.borrow
-                          : row.action == 'Return' ? classes.return
-                            : classes.expired}
+    <div>
+      <Banner title='History Page' img='url(".././images/history.jpg")' />
+      <div className={classes.root}>
+        <Paper className={classes.paper}>
+          <Toolbar>
+            <Typography>
+              History
+            </Typography>
+          </Toolbar>
+          <TableContainer>
+            <Table>
+              <EnhancedTableHead
+                classes={classes}
+                order={order}
+                orderBy={orderBy}
+                onRequestSort={handleRequestSort}
+              />
+              <TableBody>
+                {stableSort(historyCurrentUser, getComparator(order, orderBy))
+                  .map((row) => {
+                    return (
+                      <TableRow
+                        hover
+                        key={row.date}
                       >
-                        {row.action}
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
-    </div>
-  );
+                        <TableCell />
+                        <TableCell>{row.date}</TableCell>
+                        <TableCell>{row.bookTitle}</TableCell>
+                        <TableCell
+                          className={row.action == 'Borrow' ? classes.borrow
+                            : row.action == 'Return' ? classes.return
+                              : classes.expired}
+                        >
+                          {row.action}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
+      </div>
+    </div>);
 }

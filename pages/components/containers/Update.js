@@ -27,7 +27,22 @@ import {
     KeyboardDatePicker,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import { currentUser } from '../presentaions/data'
+
+const currentUser = {
+    fname: 'Theang',
+    lname: 'Dyna',
+    profile: 'https://images.hindustantimes.com/rf/image_size_960x540/HT/p2/2020/05/30/Pictures/_19298b80-a255-11ea-b043-295af9ca78f2.jpg',
+    password: 'Bad Boy 365?',
+    phoneNumber: 153657150,
+    gender: 'Male',
+    birthDate: '04/September/2003',
+    grade: '12 A',
+    address: '',
+    history: [],
+    wishlist: [],
+    notification: [],
+};
+
 
 const useStyles = makeStyles((theme) => {
     return {

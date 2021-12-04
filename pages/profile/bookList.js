@@ -19,7 +19,16 @@ import {
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { bookList } from '../components/presentaions/data'
+
+function createDataBookList(id, title, author, sponsor, category, subCategory, condition, amount, img, descripsion, date, stock) {
+  return { id, title, author, sponsor, category, subCategory, condition, amount, img, descripsion, date, stock };
+};
+
+const bookList = [
+  createDataBookList('000001', 'Title', 'Author', 'CFC', 'Kids', 'Maths', 'New', '10', 'imgurl','hello 1 2 3dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', '08-08-2021', 5),
+  
+];
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -86,6 +95,7 @@ function EnhancedTableHead(props) {
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
+              style={{width:'max-content'}}
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
@@ -177,10 +187,10 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     width: '100%',
-    marginBottom: theme.spacing(2),
+    padding: 20
   },
   table: {
-    minWidth: 750,
+   width: '100%'
   },
   visuallyHidden: {
     border: 0,
@@ -302,7 +312,7 @@ export default function EnhancedTable() {
                       <TableCell>{row.condition}</TableCell>
                       <TableCell>{row.amount}</TableCell>
                       <TableCell>{row.img}</TableCell>
-                      <TableCell>{row.descripsion}</TableCell>
+                      <TableCell><Typography noWrap style={{width: 150}}>{row.descripsion}</Typography></TableCell>
                       <TableCell>{row.date}</TableCell>
                       <TableCell className={row.stock > 3  ? classes.green : classes.red}>
                         {row.stock}

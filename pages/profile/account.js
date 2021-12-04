@@ -11,11 +11,28 @@ import {
     Button,
     Dialog,
 } from '@material-ui/core';
-import { currentUser } from '../components/presentaions/data';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import ImformationBox from '../components/presentaions/ImformationBox';
 import CtrlUpdate from '../components/containers/CtrlUpdate';
+import Banner from '../components/presentaions/Banner';
+
+
+const currentUser = {
+    fname: 'Theang',
+    lname: 'Dyna',
+    profile: 'https://images.hindustantimes.com/rf/image_size_960x540/HT/p2/2020/05/30/Pictures/_19298b80-a255-11ea-b043-295af9ca78f2.jpg',
+    password: 'Bad Boy 365?',
+    phoneNumber: 153657150,
+    gender: 'Male',
+    birthDate: '04/September/2003',
+    grade: '12 A',
+    address: '',
+    history: [],
+    wishlist: [],
+    notification: [],
+};
+
 
 const useStyles = makeStyles((theme) => ({
     profile: {
@@ -77,6 +94,7 @@ const account = () => {
     const [openEdit, setOpenEdit] = useState(false);
     return (
         <div>
+            <Banner title='Account Page' img='url(".././images/account.jpg")' />
             <Card>
                 <Grid container className={classes.profile__body}>
                     <Grid item lg={6}>
